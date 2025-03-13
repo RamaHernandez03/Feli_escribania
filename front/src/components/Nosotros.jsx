@@ -6,7 +6,6 @@ const colaboradores = [
   { nombre: 'Ignacio Alu', link: 'https://www.linkedin.com/in/ignacioalu/', categoria: 'Contable' },
   { nombre: 'Estudio Díaz Molina', link: 'https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/', categoria: 'Contable' },
   { nombre: 'Gisela Ríos', link: 'https://www.linkedin.com/in/gisela-rios-03b399159/', categoria: 'Derecho Marcario' },
-  { nombre: 'Gisela Ríos', link: 'https://giselariosabogada.com/', categoria: 'Derecho Marcario' },
   { nombre: 'Marrac S.R.L.', link: 'https://www.marrac-srl.com/', categoria: 'Comercio Exterior' },
   { nombre: 'Mariano Martinuzzi', link: 'https://www.linkedin.com/in/mariano-martinuzzi/', categoria: 'Comercio Exterior' },
   { nombre: 'Yanina Leguizamon', link: '#', categoria: 'Logística y Habilitaciones' }

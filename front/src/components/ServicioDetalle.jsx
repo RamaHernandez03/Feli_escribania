@@ -108,7 +108,7 @@ const ServicioDetalle = () => {
 
       <div className="relative w-full max-w-4xl bg-[#F5F1EB] p-6 md:p-20 mt-[-80px] shadow-lg rounded-lg z-10 text-center">
         <h1 className="text-4xl font-bold mb-2">{servicio.title}</h1>
-        <span className="block w-40 h-1 bg-[#D1AE85] mt-2 mx-auto mb-12"></span>
+        <span className="block w-64 h-1 bg-[#D1AE85] mt-2 mx-auto mb-12"></span>
         <p className="text-lg text-gray-700 mb-12 text-justify">{servicio.description}</p>
         <img 
           src={servicio.image} 
