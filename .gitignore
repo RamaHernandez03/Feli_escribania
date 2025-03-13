@@ -1,0 +1,8 @@
+node_modules/
+front/node_modules/
+back/node_modules/
+back/.env
+build/
+dist/
+.DS_Store
+front/public/inicio.mp4
