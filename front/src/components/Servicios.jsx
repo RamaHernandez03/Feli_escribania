@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 
 const Servicios = ({ image, title, description, id }) => {
   return (
-    <div className="bg-[#A89E97] rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-2 transition-transform duration-500 max-w-[300px] w-full h-[450px] flex flex-col">
-      
+    <div 
+      className="bg-[#A89E97] ml-4 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-2 transition-transform duration-500 max-w-[300px] w-full h-[450px] flex flex-col"
+      style={{
+        maxWidth: window.innerWidth < 768 ? "250px" : "300px",
+        height: window.innerWidth < 768 ? "400px" : "450px"
+      }}
+    >
       <img src={image} alt={title} className="w-full h-44 object-cover rounded-t-2xl" />
 
       <div className="p-6 flex flex-col flex-grow justify-between items-center text-center">

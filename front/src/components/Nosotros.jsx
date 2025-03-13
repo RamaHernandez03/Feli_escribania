@@ -39,7 +39,7 @@ const Nosotros = () => {
           <p className="text-justify mb-8">
             Creemos en el trabajo en equipo y en la importancia de rodearnos de profesionales que compartan nuestros valores de excelencia, confianza y compromiso.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-left w-full">
             {colaboradores.map((colaborador, index) => (
               <div key={index} className="mb-4 flex flex-col">
                 <span className="text-[#222222] text-lg font-bold flex items-center">
@@ -48,12 +48,12 @@ const Nosotros = () => {
                     href={colaborador.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="hover:text-[#D1AE85] transition-colors whitespace-nowrap"
+                    className="hover:text-[#D1AE85] transition-colors break-words whitespace-normal"
                   >
                     {colaborador.nombre}
                   </a>
                 </span>
-                <span className="text-sm text-[#555555] ml-5 whitespace-nowrap">{colaborador.categoria}</span>
+                <span className="text-sm text-[#555555] ml-5 whitespace-normal">{colaborador.categoria}</span>
               </div>
             ))}
           </div>

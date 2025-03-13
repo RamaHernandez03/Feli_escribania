@@ -14,7 +14,7 @@ import autorizaciones from "../assets/autorizaciones.jpeg";
 const Cards = () => {
   const projectData = [
     { id: "gestion-notarial-digital", image: digital, title: "Gestión Notarial Digital", description: "Trámites notariales con firma digital y certificaciones electrónicas, sin traslados." },
-    { id: "compraventa-inmuebles", image: imagenGenerica, title: "Compraventa de Inmuebles", description: "Acompañamiento integral en la compra y venta de propiedades con seguridad jurídica." },
+    { id: "compraventa-inmuebles", image: imagenGenerica, title: "Compraventa de Inmuebles", description: "Acompañamiento en la compraventa de propiedades con seguridad jurídica." },
     { id: "constitucion-sociedades", image: sociedades, title: "Constitución de Sociedades", description: "Asesoramiento en la creación y modificación de sociedades como S.A., S.A.S. y S.R.L." },
     { id: "fideicomisos", image: fideicomisos, title: "Fideicomisos", description: "Soluciones legales para adquisición de terrenos y desarrollo de proyectos inmobiliarios." },
     { id: "planificacion-patrimonial", image: patrimonio, title: "Planificación Patrimonial", description: "Asesoría en donaciones y testamentos para garantizar seguridad y tranquilidad." },
