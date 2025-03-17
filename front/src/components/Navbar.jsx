@@ -47,11 +47,11 @@ const Nav = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full flex justify-between items-center px-2 md:px-8  text-lg z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full flex justify-between items-center px-2 md:px-8 text-lg z-50 transition-all duration-300 ${
         scroll ? "bg-[#F5F1EB] text-[#222222] shadow-lg" : "bg-transparent text-[#F5F1EB]"
       }`}
     >
-      <div className="h-20 md:h-24">
+      <div className={`transition-all duration-300 ${scroll ? "h-20 md:h-24" : "h-28 md:h-32"}`}>
         <img src={scroll ? LogoFeli : LogoNegro} alt="Logo" className="h-full transition-all duration-300" />
       </div>
       <ul className="flex space-x-4 md:space-x-6 font-semibold">

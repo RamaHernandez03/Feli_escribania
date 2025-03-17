@@ -27,7 +27,7 @@ function App() {
       setIsTablet(width >= 768 && width < 1273);
     };
 
-    handleResize(); // <-- Para actualizar en el primer render
+    handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
