@@ -24,10 +24,10 @@ const Contacto = () => {
           Ubicación
           <span className="block w-40 h-1 bg-[#D1AE85] mt-2 mx-auto"></span>
         </h2>
-        <p className="mt-4 mb-6 text-lg text-[#F5F1EB] font-semibold">Encontranos en dirección 123, Buenos Aires, Argentina.</p>
+        <p className="mt-4 mb-6 text-lg text-[#F5F1EB] font-semibold">Encontranos en Sarmiento 1469, Buenos Aires, Argentina.</p>
         <div className="w-full max-w-[500px] h-[400px] rounded-xl overflow-hidden shadow-lg">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10903.77221819789!2d-58.38382211947709!3d-34.6009201663054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccac42dabce9b%3A0xbaa2d156dbe4138d!2zUGl6emVyw61hIEfDvGVycsOtbg!5e0!3m2!1sen!2sar!4v1741645317618!5m2!1sen!2sar"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.958825961751!2d-58.38997022434905!3d-34.60520265757646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7447b91feb%3A0xd9df7afcd6d063b1!2sEscribania%20La%20Riva!5e0!3m2!1sen!2sar!4v1742339596694!5m2!1sen!2sar"
             width="100%"
             height="100%"
             style={{ border: 0 }}
