@@ -15,7 +15,7 @@ const Footer = () => {
         <a href="https://www.linkedin.com/in/felipelariva/" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
           <FaLinkedin />
         </a>
-        <a href="wa.link/znfrq6" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
+        <a href="https://walink.co/7db4c2" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
           <FaWhatsapp />
         </a>
       </div>

@@ -44,7 +44,7 @@ const Formulario = () => {
       </button>
       <button
         type="button"
-        onClick={() => window.open('wa.link/znfrq6', '_blank')}
+        onClick={() => window.open('https://walink.co/7db4c2', '_blank')}
         className="bg-[#F5F1EB] border-2 font-semibold border-green-500 text-green-500 p-3 rounded-lg hover:bg-green-500 hover:text-[#F5F1EB] transition"
         >
             ¡Hablemos vía WhatsApp!
