@@ -68,7 +68,7 @@ const Cards = () => {
 
   return (
     <div id="cards" className="bg-[#F5F1EB] min-h-screen flex flex-col items-center justify-center border-4 border-b-[#D1AE85]">
-      <h2 className="text-[#222222] text-4xl font-bold relative inline-block pb-2 mb-6">
+      <h2 className="text-[#222222] text-4xl font-bold relative inline-block mt-6 md:mt-0 pb-2 mb-6">
         Servicios
         <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#D1AE85]"></span>
       </h2>
