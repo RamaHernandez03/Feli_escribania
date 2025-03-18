@@ -39,16 +39,12 @@ const Formulario = () => {
       <input name="nombre" type="text" placeholder="Nombre" value={formData.nombre} onChange={handleChange} className="p-3 rounded text-[#A89E97]" required />
       <input name="email" type="email" placeholder="Correo Electrónico" value={formData.email} onChange={handleChange} className="p-3  rounded text-[#A89E97]" required />
       <textarea name="mensaje" placeholder="Escribí tu mensaje..." value={formData.mensaje} onChange={handleChange} className="p-3 rounded h-24 text-[#A89E97]" required />
-
-      {/* Botón para enviar el formulario */}
       <button type="submit" className="p-3 rounded-lg text-[#F5F1EB] font-semibold bg-[#D1AE85] hover:bg-[#A67C52] transition">
         Enviar mensaje
       </button>
-
-      {/* Botón de WhatsApp */}
       <button
         type="button"
-        onClick={() => window.open('https://wa.me/1151457318', '_blank')}
+        onClick={() => window.open('wa.link/znfrq6', '_blank')}
         className="bg-[#F5F1EB] border-2 font-semibold border-green-500 text-green-500 p-3 rounded-lg hover:bg-green-500 hover:text-[#F5F1EB] transition"
         >
             ¡Hablemos vía WhatsApp!

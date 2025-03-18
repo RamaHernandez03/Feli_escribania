@@ -12,7 +12,7 @@ const FooterMobile = () => {
         <a href="https://www.linkedin.com/in/felipelariva/" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
           <FaLinkedin />
         </a>
-        <a href="https://wa.me/1151457318" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
+        <a href="wa.link/znfrq6" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
           <FaWhatsapp />
         </a>
       </div>
