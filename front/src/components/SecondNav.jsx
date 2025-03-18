@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
+import FooterMobile from "./FooterMobile";
 import LogoFeli from "../assets/Logo_feli.jpg";
 import LogoNegro from "../assets/logo_negro.png";
 
@@ -60,7 +60,7 @@ const SecondNavBar = () => {
               ))}
             </ul>
           </div>
-          <Footer />
+          <FooterMobile />
         </div>
       )}
     </div>
