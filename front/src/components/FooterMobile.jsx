@@ -9,7 +9,7 @@ const FooterMobile = () => {
         <img src={LogoFeli} alt="Logo" className="h-full" />
       </div>
       <div className="flex space-x-4 mb-2 mt-1">
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
+        <a href="https://www.linkedin.com/in/felipelariva/" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
           <FaLinkedin />
         </a>
         <a href="https://wa.me/1151457318" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#D1AE85] transition">
