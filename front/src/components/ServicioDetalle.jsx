@@ -101,9 +101,17 @@ const ServicioDetalle = () => {
   return (
     <div className="relative w-full min-h-screen bg-[#F5F1EB] flex flex-col items-center">
       <div className="relative w-full h-[50vh] overflow-hidden">
-        <video autoPlay loop muted className="absolute top-0 left-0 w-full h-full object-cover ">
-          <source src="/inicio.mp4" type="video/mp4" />
-        </video>
+      <video 
+  autoPlay 
+  loop 
+  muted 
+  playsInline 
+  disablePictureInPicture 
+  controlsList="nodownload nofullscreen noplaybackrate"
+  className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+>
+  <source src="/inicio.mp4" type="video/mp4" />
+</video>
       </div>
 
       <div className="relative w-full max-w-4xl bg-[#F5F1EB] p-6 md:p-20 mt-[-80px] shadow-lg rounded-lg z-10 text-center">
