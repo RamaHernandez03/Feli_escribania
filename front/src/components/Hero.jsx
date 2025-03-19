@@ -19,10 +19,10 @@ const Hero = ({ scrollToServicios }) => {
       <div className="absolute inset-0 bg-[#222222] opacity-70"></div>
       <div className="z-10">
         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-[#F5F1EB] font-semibold tracking-wide">
-          Escribania - La Riva
+          Escribania
         </h1>
         <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-[#D1AE85] tracking-wider mt-2 sm:mt-4">
-          Escribanía
+          La Riva
         </h2>
         <button
           onClick={scrollToServicios}
