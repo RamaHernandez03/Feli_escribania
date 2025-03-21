@@ -72,7 +72,7 @@ const Cards = () => {
         Servicios
         <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#D1AE85]"></span>
       </h2>
-      <p className="text-[#222222] text-lg text-justify max-w-4xl px-8 mb-8">
+      <p className="text-[#222222] text-lg text-center max-w-4xl px-8 mb-8">
         Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada trámite hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.
       </p>
       <div className="relative w-full max-w-6xl flex items-center mx-auto px-8">
