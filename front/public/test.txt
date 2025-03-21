@@ -1,0 +1,57 @@
+import React from "react";
+
+const Hero = () => {
+  const logosClientes = [
+    { src: require("../assets/reason.png"), link: "https://www.instagram.com/reason_prod/" },
+    { src: require("../assets/plant_based_food.png"), link: "https://vegabundancia.com/" },
+    { src: require("../assets/thermo.png"), link: "https://thermoquality.cl/" },
+    { src: require("../assets/west_mall.png"), link: "https://www.instagram.com/somoswestmall/" },
+    { src: require("../assets/poolGroup.png"), link: "https://www.instagram.com/poolgroup.piscinas/" },
+    { src: require("../assets/bnco.png"), link: "https://www.grupobnco.com/" },
+    { src: require("../assets/apdeca.png"), link: "https://www.apdeca.org/" },
+    { src: require("../assets/dakotta.png"), link: "https://www.apdeca.org/" },
+    { src: require("../assets/hurling.png"), link: "https://www.instagram.com/materialesdakotta/" },
+  ];
+
+  return (
+    <div className="relative w-full h-screen flex items-center justify-center text-center text-white px-4" id="hero">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        disablePictureInPicture 
+        controlsList="nodownload nofullscreen noplaybackrate"
+        className="absolute w-full h-full object-cover pointer-events-none"
+      >
+        <source src="/inicio.mp4" type="video/mp4" />
+        Tu navegador no soporta videos.
+      </video>
+
+      <div className="absolute inset-0 bg-[#222222] opacity-80"></div>
+      <div className="z-10">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-[#F5F1EB] font-semibold tracking-wide">
+          Escribanía - La Riva
+        </h1>
+        <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-[#D1AE85] tracking-wider mt-2 sm:mt-4">
+          Seguridad Jurídica
+        </h2>
+      </div>
+
+      {/* Sección de clientes sin fondo crema y sin texto */}
+      <div className="absolute bottom-0 w-full bg-transparent text-center py-12 px-6">
+        <h2 className="text-3xl font-semibold text-white">Confían en nosotros</h2>
+        <span className="block w-72 h-1 bg-[#D1AE85] mt-2 mx-auto mb-6"></span>
+        <div className="flex flex-wrap justify-center gap-6">
+          {logosClientes.map((cliente, index) => (
+            <a key={index} href={cliente.link} target="_blank" rel="noopener noreferrer">
+              <img src={cliente.src} alt={`Cliente ${index + 1}`} className="w-20 h-20 rounded-full shadow-md hover:scale-105 transition-transform" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
