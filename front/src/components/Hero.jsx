@@ -16,7 +16,7 @@ const Hero = ({ scrollToServicios }) => {
             Tu navegador no soporta videos.
       </video>
 
-      <div className="absolute inset-0 bg-[#222222] opacity-70"></div>
+      <div className="absolute inset-0 bg-[#222222] opacity-80"></div>
       <div className="z-10">
         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-[#F5F1EB] font-semibold tracking-wide">
           Escribania
