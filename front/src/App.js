@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./locales"; 
 import Hero from "./components/Hero";
 import Nav from "./components/Navbar";
-import SecondNavBar from "./components/SecondNav"; 
+import SecondNavBar from "./components/SecondNav";
 import Cards from "./components/Cards";
 import CardsTablet from "./components/TabletCards";
 import Nosotros from "./components/Nosotros";
@@ -10,6 +11,7 @@ import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
 import FooterMobile from "./components/FooterMobile";
 import ServicioDetalle from "./components/ServicioDetalle";
+import "./i18n";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -27,33 +29,35 @@ function App() {
       setIsTablet(width >= 768 && width < 1273);
     };
 
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <Router>
-      {isMobile ? <SecondNavBar /> : <Nav />}
-      
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero scrollToServicios={scrollToServicios} />
-              <div ref={serviciosRef}>
-                {isTablet ? <CardsTablet /> : <Cards />}
-              </div>
-              <Nosotros />
-              <Contacto />
-              {isMobile ? <FooterMobile imgSize="large" /> : <Footer />}
-            </>
-          }
-        />
-        <Route path="/servicios/:servicioId" element={<ServicioDetalle />} />
-      </Routes>
-    </Router>
+    <LanguageProvider> {/* 🔹 Envolvemos todo en el LanguageProvider */}
+      <Router>
+        {isMobile ? <SecondNavBar /> : <Nav />}
+        
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero scrollToServicios={scrollToServicios} />
+                <div ref={serviciosRef}>
+                  {isTablet ? <CardsTablet /> : <Cards />}
+                </div>
+                <Nosotros />
+                <Contacto />
+                {isMobile ? <FooterMobile imgSize="large" /> : <Footer />}
+              </>
+            }
+          />
+          <Route path="/servicios/:servicioId" element={<ServicioDetalle />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import FooterMobile from "./FooterMobile";
+import LanguageSwitcher from "./LanguageSwitcher";
 import LogoFeli from "../assets/Logo_feli.jpg";
 import LogoNegro from "../assets/logo_negro.png";
 
 const SecondNavBar = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
 
@@ -33,12 +36,15 @@ const SecondNavBar = () => {
         <div className="h-20 md:h-24">
           <img src={scroll ? LogoFeli : LogoNegro} alt="Logo" className="h-full transition-all duration-300" />
         </div>
-        <button
-          onClick={toggleMenu}
-          className={`text-4xl focus:outline-none ${scroll ? "text-black" : "text-[#F5F1EB]"}`}
-        >
-          <FaBars />
-        </button>
+        <div className="flex items-center space-x-4">
+          <LanguageSwitcher />
+          <button
+            onClick={toggleMenu}
+            className={`text-4xl focus:outline-none ${scroll ? "text-black" : "text-[#F5F1EB]"}`}
+          >
+            <FaBars />
+          </button>
+        </div>
       </div>
       {isOpen && (
         <div className="fixed inset-0 bg-[#F5F1EB] text-[#222222] flex flex-col justify-center text-center z-50">
@@ -47,7 +53,7 @@ const SecondNavBar = () => {
           </button>
           <div className="flex flex-col items-center justify-center flex-grow">
             <ul className="text-4xl space-y-8 font-bold w-full">
-              {[{ name: "Inicio", id: "hero" }, { name: "Servicios", id: "cards" }, { name: "Nosotros", id: "nosotros" }, { name: "Contacto", id: "contacto" }].map((item, index) => (
+              {[{ name: t("navbar.inicio"), id: "hero" }, { name: t("navbar.servicios"), id: "cards" }, { name: t("navbar.nosotros"), id: "nosotros" }, { name: t("navbar.contacto"), id: "contacto" }].map((item, index) => (
                 <li key={index} className="w-full">
                   <Link
                     to="/"

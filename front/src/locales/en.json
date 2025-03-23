@@ -1,0 +1,159 @@
+{
+    "hero": {
+      "title": "Escribanía - La Riva",
+      "subtitle": "Legal Security",
+      "button": "I need advice",
+      "unsupportedVideo": "Your browser does not support videos."
+    },
+        "cards": {
+          "title": "Services",
+          "description": "We provide a notarial service of excellence, combining professionalism and human warmth. We understand that behind every procedure, there are dreams and important decisions. That’s why we support individuals and businesses with personalized advice and guidance, ensuring clear, secure, and reliable processes.",
+          "services": {
+            "digital": {
+              "title": "Digital Notarial Management",
+              "description": "Notarial procedures with digital signature and electronic certifications, without travel."
+            },
+            "realEstate": {
+              "title": "Real Estate Sales",
+              "description": "Support in the purchase and sale of properties with legal security."
+            },
+            "societies": {
+              "title": "Company Formation",
+              "description": "Advice on creating and modifying companies such as S.A., S.A.S., and S.R.L."
+            },
+            "trusts": {
+              "title": "Trusts",
+              "description": "Legal solutions for land acquisition and real estate project development."
+            },
+            "estatePlanning": {
+              "title": "Estate Planning",
+              "description": "Advice on donations and wills to ensure security and peace of mind."
+            },
+            "notarialActs": {
+              "title": "Notarial Acts",
+              "description": "Legal certification of facts to safeguard rights and interests."
+            },
+            "powers": {
+              "title": "Notarial Powers",
+              "description": "Drafting of general or special powers tailored to each need."
+            },
+            "privateContracts": {
+              "title": "Private Contracts",
+              "description": "Formalization of lease, loan, and other legally valid agreements."
+            },
+            "authorizations": {
+              "title": "Authorizations and Permits",
+              "description": "Management of travel authorizations and vehicle/boat driving permits."
+            },
+            "certifications": {
+              "title": "Notarial Certifications",
+              "description": "Certification of signatures and documents with authenticity and legal validity."
+            }
+          }
+        },
+            "about": {
+              "title": "Who We Are",
+              "description1": "We are a notary office with over 10 years of experience in Corporate and Registry Law, specializing in consultancy and legal advisory services for local and international companies.",
+              "description2": "We work together with professionals from different fields to offer comprehensive and efficient solutions. Our team, led by Notary Felipe La Riva along with Rocío Torterola and María Celia Garcia Costero, combines modernity and experience in the notarial function.",
+              "description3": "We are committed to providing a personalized service, ensuring legal security with professionalism and trust.",
+              "collaborators": {
+                "title": "Collaborators",
+                "description": "We believe in teamwork and the importance of surrounding ourselves with professionals who share our values of excellence, trust, and commitment.",
+                "list": [
+                  { "name": "Plan.Co", "link": "https://www.planco.ar/", "category": "Accounting" },
+                  { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Accounting" },
+                  { "name": "Estudio Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Accounting" },
+                  { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Trademark Law" },
+                  { "name": "Marrac S.R.L.", "link": "https://www.marrac-srl.com/", "category": "Foreign Trade" },
+                  { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Foreign Trade" },
+                  { "name": "Yanina Leguizamon", "link": "#", "category": "Logistics and Permits" }
+                ]
+              }
+            },
+            "contact": {
+                "title": "Contact",
+                "subtitle": "Any questions? Let's talk via Email or WhatsApp.",
+                "location": {
+                    "title": "Location",
+                    "address": "Find us at Sarmiento 1469, Buenos Aires, Argentina."
+                }
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Write your message...",
+    "send_button": "Send message",
+    "whatsapp_button": "Let's talk via WhatsApp!",
+    "alert": {
+      "success": "Message sent successfully",
+      "error": "Error sending the message",
+      "connection": "Server connection error"
+    }
+  },
+  "footer": {
+    "rights": "©Escribania - La Riva | All Rights Reserved"
+  },
+  "servicios": {
+    "agendar_consulta": "Schedule Appointment"
+  },
+
+    "detallesServicios": {
+      "gestion-notarial-digital": {
+        "title": "Digital Notarial Management",
+        "description": "Technology allows us to streamline and simplify notarial procedures without losing legal security. Through the platform created by the College of Notaries of Buenos Aires City, we offer the possibility of managing documents remotely, with digital signatures and electronic certifications, avoiding unnecessary travel and optimizing time."
+      },
+      "compraventa-inmuebles": {
+        "title": "Real Estate Transactions",
+        "description": "Real estate transactions are one of the most relevant acts in a notary office. We provide comprehensive support at each stage, ensuring that the operation is carried out with complete legal security, whether you are buying your first home or making an investment."
+      },
+      "constitucion-sociedades": {
+        "title": "Company Formation",
+        "description": "We support entrepreneurs and local and foreign companies in the incorporation, modification, and dissolution of companies. We advise on choosing the most suitable corporate type, including S.A., S.A.S., S.R.L., and other business organization models."
+      },
+      "fideicomisos": {
+        "title": "Trusts",
+        "description": "Trusts are a versatile tool used in various fields, especially in the real estate sector. They are employed for land acquisition, project development, and subsequent commercialization, providing security and transparency to all involved parties."
+      },
+      "planificacion-patrimonial": {
+        "title": "Estate Planning",
+        "description": "We guide you in planning your estate, ensuring that donations and wills align with your wishes and family needs. We analyze each case to find the best legal option and provide peace of mind to your loved ones."
+      },
+      "actas-notariales": {
+        "title": "Notarial Acts",
+        "description": "Notarial acts are public documents that certify events witnessed by the notary. They are essential to guarantee the truthfulness and authenticity of certain situations, providing legal security to those who require them."
+      },
+      "poderes-notariales": {
+        "title": "Notarial Powers",
+        "description": "A power of attorney is a document through which one person authorizes another to act on their behalf. We provide guidance in drafting and granting general or special powers, ensuring they fit your needs."
+      },
+      "contratos-privados": {
+        "title": "Private Contracts",
+        "description": "We draft and formalize private contracts for various situations, such as lease agreements, loans (mutuals), money donations, and counter-documents, ensuring their legal validity."
+      },
+      "autorizaciones-permisos": {
+        "title": "Authorizations and Permits",
+        "description": "We manage authorizations for minors to travel within and outside the country and draft driving permits for vehicles, boats, and aircraft, allowing third parties to drive with the corresponding legal authorization."
+      },
+      "certificaciones-notariales": {
+        "title": "Notarial Certifications",
+        "description": "We carry out certifications of signatures, copies, and documents, guaranteeing their authenticity and legal validity. This service is essential for administrative, commercial, and legal procedures."
+      }
+    },
+    "servicio_detalle": {
+      "agendar_turno": "Schedule Appointment",
+      "volver_inicio": "Return to Home"
+    },
+    "navbar": {
+        "inicio": "Home",
+        "servicios": "Services",
+        "nosotros": "About Us",
+        "contacto": "Contact"
+  }
+  }  
+  
+    
+
+                
+
+  
+  

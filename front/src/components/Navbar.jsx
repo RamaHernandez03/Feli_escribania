@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import LogoFeli from "../assets/Logo_feli.jpg"; // Asegúrate de que la ruta sea correcta
-import LogoNegro from "../assets/logo_negro.png"; // Asegúrate de que la ruta sea correcta
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import LogoFeli from "../assets/Logo_feli.jpg";
+import LogoNegro from "../assets/logo_negro.png";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { LanguageContext } from "../locales";
 
 const Nav = () => {
   const [scroll, setScroll] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     const handleScroll = () => setScroll(window.scrollY > 50);
@@ -54,12 +57,12 @@ const Nav = () => {
       <div className={`transition-all duration-300 ${scroll ? "h-20 md:h-24" : "h-28 md:h-32"}`}>
         <img src={scroll ? LogoFeli : LogoNegro} alt="Logo" className="h-full transition-all duration-300" />
       </div>
-      <ul className="flex space-x-4 md:space-x-6 font-semibold">
+      <ul className="flex space-x-4 md:space-x-6 font-semibold items-center">
         {[
-          { name: "Inicio", path: "/", id: "hero" },
-          { name: "Servicios", path: "/", id: "cards" },
-          { name: "Nosotros", path: "/", id: "nosotros" },
-          { name: "Contacto", path: "/", id: "contacto" },
+          { name: language === "es" ? "Inicio" : "Home", path: "/", id: "hero" },
+          { name: language === "es" ? "Servicios" : "Services", path: "/", id: "cards" },
+          { name: language === "es" ? "Nosotros" : "About Us", path: "/", id: "nosotros" },
+          { name: language === "es" ? "Contacto" : "Contact", path: "/", id: "contacto" },
         ].map((item, index) => (
           <li key={index} className="relative cursor-pointer">
             <button
@@ -70,6 +73,10 @@ const Nav = () => {
             </button>
           </li>
         ))}
+        {/* Switch de idioma */}
+        <li className="relative cursor-pointer">
+          <LanguageSwitcher />
+        </li>
       </ul>
     </nav>
   );

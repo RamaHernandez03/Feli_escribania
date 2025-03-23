@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Servicios from "./Servicios";
 import imagenGenerica from "../assets/inmobiliaria.jpg";
 import digital from "../assets/digital.jpeg";
@@ -12,17 +13,19 @@ import actas from "../assets/actas.jpeg";
 import autorizaciones from "../assets/autorizaciones.jpeg";
 
 const Cards = () => {
+  const { t } = useTranslation();
+
   const projectData = [
-    { id: "gestion-notarial-digital", image: digital, title: "Gestión Notarial Digital", description: "Trámites notariales con firma digital y certificaciones electrónicas, sin traslados." },
-    { id: "compraventa-inmuebles", image: imagenGenerica, title: "Compraventa de Inmuebles", description: "Acompañamiento en la compraventa de propiedades con seguridad jurídica." },
-    { id: "constitucion-sociedades", image: sociedades, title: "Constitución de Sociedades", description: "Asesoramiento en la creación y modificación de sociedades como S.A., S.A.S. y S.R.L." },
-    { id: "fideicomisos", image: fideicomisos, title: "Fideicomisos", description: "Soluciones legales para adquisición de terrenos y desarrollo de proyectos inmobiliarios." },
-    { id: "planificacion-patrimonial", image: patrimonio, title: "Planificación Patrimonial", description: "Asesoría en donaciones y testamentos para garantizar seguridad y tranquilidad." },
-    { id: "actas-notariales", image: actas, title: "Actas Notariales", description: "Certificación legal de hechos para resguardar derechos e intereses." },
-    { id: "poderes-notariales", image: poderes, title: "Poderes Notariales", description: "Redacción de poderes generales o especiales ajustados a cada necesidad." },
-    { id: "contratos-privados", image: contratos, title: "Contratos Privados", description: "Formalización de contratos de locación, préstamos y otros acuerdos con validez legal." },
-    { id: "autorizaciones-permisos", image: autorizaciones, title: "Autorizaciones y Permisos", description: "Gestión de autorizaciones de viaje y permisos de conducción de vehículos y embarcaciones." },
-    { id: "certificaciones-notariales", image: certificaciones, title: "Certificaciones Notariales", description: "Certificación de firmas y documentos con autenticidad y validez legal." },
+    { id: "gestion-notarial-digital", image: digital, title: t("cards.services.digital.title"), description: t("cards.services.digital.description") },
+    { id: "compraventa-inmuebles", image: imagenGenerica, title: t("cards.services.realEstate.title"), description: t("cards.services.realEstate.description") },
+    { id: "constitucion-sociedades", image: sociedades, title: t("cards.services.societies.title"), description: t("cards.services.societies.description") },
+    { id: "fideicomisos", image: fideicomisos, title: t("cards.services.trusts.title"), description: t("cards.services.trusts.description") },
+    { id: "planificacion-patrimonial", image: patrimonio, title: t("cards.services.estatePlanning.title"), description: t("cards.services.estatePlanning.description") },
+    { id: "actas-notariales", image: actas, title: t("cards.services.notarialActs.title"), description: t("cards.services.notarialActs.description") },
+    { id: "poderes-notariales", image: poderes, title: t("cards.services.powers.title"), description: t("cards.services.powers.description") },
+    { id: "contratos-privados", image: contratos, title: t("cards.services.privateContracts.title"), description: t("cards.services.privateContracts.description") },
+    { id: "autorizaciones-permisos", image: autorizaciones, title: t("cards.services.authorizations.title"), description: t("cards.services.authorizations.description") },
+    { id: "certificaciones-notariales", image: certificaciones, title: t("cards.services.certifications.title"), description: t("cards.services.certifications.description") },
   ];  
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,16 +38,12 @@ const Cards = () => {
     const updateLayout = () => {
       const screenWidth = window.innerWidth;
   
-      if (screenWidth < 768) {
-        setVisibleCards(1);
-      } else {
-        setVisibleCards(3);
-      }
+      setVisibleCards(screenWidth < 768 ? 1 : 3);
   
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
         const newCardWidth = screenWidth < 768 
-          ? containerWidth  // Ocupa todo el contenedor en mobile para que quede centrado
+          ? containerWidth  
           : (containerWidth - (gap * (visibleCards - 1))) / visibleCards;
   
         setCardWidth(newCardWidth);
@@ -56,8 +55,6 @@ const Cards = () => {
     return () => window.removeEventListener("resize", updateLayout);
   }, []);
   
-  
-
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, projectData.length - visibleCards));
   };
@@ -69,11 +66,11 @@ const Cards = () => {
   return (
     <div id="cards" className="bg-[#F5F1EB] min-h-screen flex flex-col items-center justify-center border-4 border-b-[#D1AE85]">
       <h2 className="text-[#222222] text-4xl font-bold relative inline-block mt-6 md:mt-0 pb-2 mb-6">
-        Servicios
+        {t("cards.title")}
         <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#D1AE85]"></span>
       </h2>
-      <p className="text-[#222222] text-lg text-center max-w-4xl px-8 mb-8">
-        Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada trámite hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.
+      <p className="text-[#222222] text-lg justify-center max-w-4xl px-8 mb-8">
+        {t("cards.description")}
       </p>
       <div className="relative w-full max-w-6xl flex items-center mx-auto px-8">
         <button

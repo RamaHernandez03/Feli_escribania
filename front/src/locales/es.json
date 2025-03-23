@@ -1,0 +1,154 @@
+{
+    "hero": {
+      "title": "Escribanía - La Riva",
+      "subtitle": "Seguridad Jurídica",
+      "button": "Busco asesoramiento",
+      "unsupportedVideo": "Tu navegador no soporta videos."
+    },
+        "cards": {
+          "title": "Servicios",
+          "description": "Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada trámite hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.",
+          "services": {
+            "digital": {
+              "title": "Gestión Notarial Digital",
+              "description": "Trámites notariales con firma digital y certificaciones electrónicas, sin traslados."
+            },
+            "realEstate": {
+              "title": "Compraventa de Inmuebles",
+              "description": "Acompañamiento en la compraventa de propiedades con seguridad jurídica."
+            },
+            "societies": {
+              "title": "Constitución de Sociedades",
+              "description": "Asesoramiento en la creación y modificación de sociedades como S.A., S.A.S. y S.R.L."
+            },
+            "trusts": {
+              "title": "Fideicomisos",
+              "description": "Soluciones legales para adquisición de terrenos y desarrollo de proyectos inmobiliarios."
+            },
+            "estatePlanning": {
+              "title": "Planificación Patrimonial",
+              "description": "Asesoría en donaciones y testamentos para garantizar seguridad y tranquilidad."
+            },
+            "notarialActs": {
+              "title": "Actas Notariales",
+              "description": "Certificación legal de hechos para resguardar derechos e intereses."
+            },
+            "powers": {
+              "title": "Poderes Notariales",
+              "description": "Redacción de poderes generales o especiales ajustados a cada necesidad."
+            },
+            "privateContracts": {
+              "title": "Contratos Privados",
+              "description": "Formalización de contratos de locación, préstamos y otros acuerdos con validez legal."
+            },
+            "authorizations": {
+              "title": "Autorizaciones y Permisos",
+              "description": "Gestión de autorizaciones de viaje y permisos de conducción de vehículos y embarcaciones."
+            },
+            "certifications": {
+              "title": "Certificaciones Notariales",
+              "description": "Certificación de firmas y documentos con autenticidad y validez legal."
+            }
+          }
+    },
+    "about": {
+        "title": "¿Quiénes Somos?",
+        "description1": "Somos una escribanía con más de 10 años de experiencia en Derecho Societario y Registral, especializada en consultoría y asesoramiento ante organismos legales para empresas locales y extranjeras.",
+        "description2": "Trabajamos en conjunto con diversas áreas profesionales para ofrecer soluciones integrales y eficientes. Nuestro equipo, liderado por el Escribano Felipe La Riva junto a Rocío Torterola y María Celia Garcia Costero, combina modernidad y trayectoria en la función notarial.",
+        "description3": "Nos comprometemos a brindar un servicio personalizado, garantizando seguridad jurídica con profesionalismo y confianza.",
+        "collaborators": {
+            "title": "Colaboradores",
+            "description": "Creemos en el trabajo en equipo y en la importancia de rodearnos de profesionales que compartan nuestros valores de excelencia, confianza y compromiso.",
+            "list": [
+                { "name": "Plan.Co", "link": "https://www.planco.ar/", "category": "Contable" },
+                { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Contable" },
+                { "name": "Estudio Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Contable" },
+                { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Derecho Marcario" },
+                { "name": "Marrac S.R.L.", "link": "https://www.marrac-srl.com/", "category": "Comercio Exterior" },
+                { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Comercio Exterior" },
+                { "name": "Yanina Leguizamon", "link": "#", "category": "Logística y Habilitaciones" }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Alguna duda? Hablemos vía Email o WhatsApp.",
+    "location": {
+      "title": "Ubicación",
+      "address": "Encontranos en Sarmiento 1469, Buenos Aires, Argentina."
+    }
+  },
+  "form": {
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "message": "Escribí tu mensaje...",
+    "send_button": "Enviar mensaje",
+    "whatsapp_button": "¡Hablemos vía WhatsApp!",
+    "alert": {
+      "success": "Mensaje enviado correctamente",
+      "error": "Error al enviar el mensaje",
+      "connection": "Error de conexión con el servidor"
+    }
+  },
+  "footer": {
+    "rights": "©Escribania - La Riva | Todos los Derechos Reservados"
+  },
+  "servicios": {
+    "agendar_consulta": "Agendar Consulta"
+  },
+    "detallesServicios": {
+      "gestion-notarial-digital": {
+        "title": "Gestión Notarial Digital",
+        "description": "La tecnología nos permite agilizar y simplificar trámites notariales sin perder seguridad jurídica. A través de la Plataforma creada por el Colegio de Escribanos de la Ciudad Autónoma de Buenos Aires, ofrecemos la posibilidad de gestionar documentos de forma remota, con firma digital y certificaciones electrónicas, evitando traslados innecesarios y optimizando tiempos."
+      },
+      "compraventa-inmuebles": {
+        "title": "Compraventa de Inmuebles",
+        "description": "La compraventa de inmuebles es uno de los actos más relevantes en una Escribanía. Te brindamos un acompañamiento integral en cada etapa, asegurando que la operación se realice con total seguridad jurídica, ya sea para comprar tu primera vivienda o realizar una inversión."
+      },
+      "constitucion-sociedades": {
+        "title": "Constitución de Sociedades",
+        "description": "Acompañamos a emprendedores y empresas locales y extranjeras en la constitución, modificación y disolución de sociedades. Te asesoramos en la elección del tipo societario más conveniente, incluyendo S.A., S.A.S., S.R.L. y otros modelos de organización empresarial."
+      },
+      "fideicomisos": {
+        "title": "Fideicomisos",
+        "description": "El fideicomiso es una herramienta versátil utilizada en diversos ámbitos, especialmente en el sector inmobiliario. Se emplea para la adquisición de terrenos, desarrollo de proyectos y posterior comercialización, brindando seguridad y transparencia a todas las partes involucradas."
+      },
+      "planificacion-patrimonial": {
+        "title": "Planificación Patrimonial",
+        "description": "Te orientamos en la planificación de tu patrimonio, asegurando que las donaciones y testamentos se ajusten a tus deseos y necesidades familiares. Analizamos cada caso para encontrar la mejor opción legal y brindar tranquilidad a quienes más te importan."
+      },
+      "actas-notariales": {
+        "title": "Actas Notariales",
+        "description": "Las actas notariales son documentos públicos que certifican hechos presenciados por el escribano. Son fundamentales para garantizar la veracidad y autenticidad de determinadas situaciones, aportando seguridad jurídica a quien las requiera."
+      },
+      "poderes-notariales": {
+        "title": "Poderes Notariales",
+        "description": "Un poder es un documento mediante el cual una persona autoriza a otra a actuar en su nombre. Te asesoramos en la redacción y otorgamiento de poderes generales o especiales, asegurando que se ajusten a tus necesidades."
+      },
+      "contratos-privados": {
+        "title": "Contratos Privados",
+        "description": "Redactamos y formalizamos contratos privados para diversas situaciones, como contratos de locación, préstamos (mutuos), donaciones de dinero y contradocumentos, garantizando su validez legal."
+      },
+      "autorizaciones-permisos": {
+        "title": "Autorizaciones y Permisos",
+        "description": "Gestionamos autorizaciones para el traslado de menores dentro y fuera del país y redactamos permisos de manejo para vehículos, embarcaciones y aeronaves, permitiendo que terceros puedan conducir con la autorización legal correspondiente."
+      },
+      "certificaciones-notariales": {
+        "title": "Certificaciones Notariales",
+        "description": "Realizamos certificaciones de firmas, copias y documentos, garantizando su autenticidad y validez legal. Este servicio es fundamental para trámites administrativos, comerciales y jurídicos."
+      }
+    },
+    "servicio_detalle": {
+        "agendar_turno": "Agendar Turno de Consulta",
+        "volver_inicio": "Volver a la Página de Inicio"
+    },
+        "navbar": {
+          "inicio": "Inicio",
+          "servicios": "Servicios",
+          "nosotros": "Nosotros",
+          "contacto": "Contacto"
+        }
+      
+}  
+      
+  
