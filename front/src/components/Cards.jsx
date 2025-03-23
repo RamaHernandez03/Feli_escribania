@@ -69,7 +69,7 @@ const Cards = () => {
         {t("cards.title")}
         <span className="absolute left-0 bottom-[-4px] w-full h-[4px] bg-[#D1AE85]"></span>
       </h2>
-      <p className="text-[#222222] text-lg justify-center max-w-4xl px-8 mb-8">
+      <p className="text-[#222222] text-lg text-justify max-w-4xl px-8 mb-8">
         {t("cards.description")}
       </p>
       <div className="relative w-full max-w-6xl flex items-center mx-auto px-8">
