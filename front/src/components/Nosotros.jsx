@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import oficina from '../assets/feli3.jpg';
+import CarruselClientes from '../components/CarruselClientes'; // Asegúrate de que la ruta es correcta
 
 const Nosotros = () => {
   const { t } = useTranslation();
-
   const colaboradores = t('about.collaborators.list', { returnObjects: true });
 
   return (
-    <div id="nosotros" className="bg-[#F5F1EB] min-h-screen flex items-center justify-center w-screen px-6 md:px-16 lg:px-24 py-12">
+    <div id="nosotros" className="bg-[#F5F1EB] min-h-screen flex flex-col items-center justify-center w-screen px-6 md:px-16 lg:px-24 py-12">
       <div className="flex flex-col md:flex-row max-w-7xl w-full items-center">
         <img
           src={oficina}
@@ -48,6 +48,8 @@ const Nosotros = () => {
           </div>
         </div>
       </div>
+
+      {/* Carrusel de clientes */}
     </div>
   );
 };

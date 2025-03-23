@@ -147,7 +147,11 @@
           "servicios": "Servicios",
           "nosotros": "Nosotros",
           "contacto": "Contacto"
-        }
+        },
+  "clientes": {
+    "titulo": "Confian en nosotros",
+    "subtitulo": "Nos enorgullece acompañar a empresas y emprendedores en su crecimiento, brindando asesoramiento notarial con profesionalismo y compromiso. A lo largo de nuestra trayectoria, hemos trabajado con distintos sectores, ofreciendo soluciones adaptadas a cada necesidad. Aquí compartimos algunos de los clientes que han confiado en nosotros. Cada uno de ellos es parte de nuestra historia y del valor que buscamos aportar en cada gestión."
+  }
       
 }  
       
