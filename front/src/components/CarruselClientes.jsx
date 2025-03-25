@@ -34,7 +34,7 @@ const MarqueeCarousel = () => {
             <img 
               src={logo.src} 
               alt={`Cliente ${index + 1}`} 
-              className="w-20 h-20 rounded-full shadow-md hover:scale-105 transition-transform" 
+              className="w-24 h-24 rounded-full shadow-md hover:scale-105 transition-transform" 
             />
           </a>
         ))}
