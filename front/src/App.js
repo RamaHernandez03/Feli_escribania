@@ -12,6 +12,11 @@ import Footer from "./components/Footer";
 import FooterMobile from "./components/FooterMobile";
 import ServicioDetalle from "./components/ServicioDetalle";
 import "./i18n";
+import "primereact/resources/themes/lara-light-blue/theme.css";  // Tema
+import "primereact/resources/primereact.min.css";  // Estilos generales
+import "primeicons/primeicons.css";  // Íconos
+
+        
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import oficina from '../assets/feli3.jpg';
-import CarruselClientes from '../components/CarruselClientes'; // Asegúrate de que la ruta es correcta
+import MarqueeCarousel from '../components/CarruselClientes'; // Asegúrate de que la ruta es correcta
 
 const Nosotros = () => {
   const { t } = useTranslation();
@@ -48,8 +48,14 @@ const Nosotros = () => {
           </div>
         </div>
       </div>
-
-      {/* Carrusel de clientes */}
+      <div className="text-center mt-12">
+        <h2 className="text-3xl font-bold">{t('trust.title')}</h2>
+        <span className="block w-72 h-1 bg-[#D1AE85] mt-2 mx-auto mb-6"></span>
+        <p className="text-lg text-gray-700 text-justify max-w-4xl mx-auto mb-12">
+           {t('trust.description')}
+        </p>
+      </div>
+      <MarqueeCarousel/>
     </div>
   );
 };

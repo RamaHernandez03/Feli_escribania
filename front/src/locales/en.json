@@ -149,11 +149,10 @@
         "nosotros": "About Us",
         "contacto": "Contact"
   },
-  "clientes": {
-    "titulo": "Our Clients",
-    "subtitulo": "We take pride in supporting businesses and entrepreneurs in their growth, providing notarial advisory services with professionalism and commitment. Throughout our journey, we have worked with various sectors, offering tailored solutions to meet each need. Here, we share some of the clients who have placed their trust in us. Each of them is part of our history and the value we strive to bring to every transaction."
+  "trust": {
+    "title": "Our Clients",
+    "description": "We take pride in supporting businesses and entrepreneurs in their growth, providing notarial advisory services with professionalism and commitment. Throughout our journey, we have worked with various sectors, offering tailored solutions to meet each need. Here, we share some of the clients who have placed their trust in us. Each of them is part of our history and the value we strive to bring to every transaction."
   }
-
 }  
   
     

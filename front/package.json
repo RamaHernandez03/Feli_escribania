@@ -18,6 +18,8 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.477.0",
     "npm": "^11.2.0",
+    "primeicons": "^7.0.0",
+    "primereact": "^8.7.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",
@@ -27,6 +29,7 @@
     "react-router-dom": "^7.3.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.3",
+    "react-transition-group": "^4.4.5",
     "swiper": "^11.2.5",
     "web-vitals": "^2.1.4"
   },
