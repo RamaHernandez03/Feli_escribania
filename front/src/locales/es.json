@@ -10,36 +10,36 @@
           "description": "Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada negocio hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.",
           "services": {
             "digital": {
-              "title": "Gestión Notarial Digital",
-              "description": "Trámites notariales con firma digital y certificaciones electrónicas, sin traslados."
+              "title": "Escribanía Digital",
+              "description": "Gestiones notariales con firma digital y certificaciones electrónicas, sin traslados."
             },
             "realEstate": {
-              "title": "Compraventa de Inmuebles",
-              "description": "Acompañamiento en la compraventa de propiedades con seguridad jurídica."
+              "title": "Operaciones Inmobiliarias",
+              "description": "Asesoramiento en desarrollos inmobiliarios, adaptado a las necesidades de cada cliente de manera segura, práctica y económica."
             },
             "societies": {
-              "title": "Constitución de Sociedades",
-              "description": "Asesoramiento en la creación y modificación de sociedades como S.A., S.A.S. y S.R.L."
+              "title": "Sociedades",
+              "description": "Especialistas en la creación, modificación y reorganización de estructuras societarias, tanto para empresas locales como extranjeras, incluyendo S.A., S.R.L., "
             },
             "trusts": {
               "title": "Fideicomisos",
               "description": "Soluciones legales para adquisición de terrenos y desarrollo de proyectos inmobiliarios."
             },
             "estatePlanning": {
-              "title": "Planificación Patrimonial",
-              "description": "Asesoría en donaciones y testamentos para garantizar seguridad y tranquilidad."
+              "title": "Planificación Sucesoria",
+              "description": "Asesoramiento en la planificación patrimonial anticipada, mediante donaciones y testamentos, para garantizar seguridad, tranquilidad y beneficios impositivos."
             },
             "notarialActs": {
-              "title": "Actas Notariales",
-              "description": "Certificación legal de hechos para resguardar derechos e intereses."
+              "title": "Actas y Certificaciones Notariales",
+              "description": "Certificación legal de hechos mediante Actas Notariales, protección de derechos e intereses, y certificación de firmas y documentos con validez legal."
             },
             "powers": {
               "title": "Poderes Notariales",
-              "description": "Redacción de poderes generales o especiales ajustados a cada necesidad."
+              "description": "Otorgamiento poderes generales o especiales ajustados a cada necesidad, para validez local e internacional."
             },
             "privateContracts": {
               "title": "Contratos Privados",
-              "description": "Formalización de contratos de locación, préstamos y otros acuerdos con validez legal."
+              "description": "Redacción y análisis de contratos de locación, préstamos y otros acuerdos con validez legal."
             },
             "authorizations": {
               "title": "Autorizaciones y Permisos",
@@ -96,36 +96,36 @@
   },
     "detallesServicios": {
       "gestion-notarial-digital": {
-        "title": "Gestión Notarial Digital",
-        "description": "La tecnología nos permite agilizar y simplificar trámites notariales sin perder seguridad jurídica. A través de la Plataforma creada por el Colegio de Escribanos de la Ciudad Autónoma de Buenos Aires, ofrecemos la posibilidad de gestionar documentos de forma remota, con firma digital y certificaciones electrónicas, evitando traslados innecesarios y optimizando tiempos."
+        "title": "Escribania Digital",
+        "description": "La tecnología nos permite agilizar y simplificar trámites notariales sin perder seguridad jurídica. A través de la Plataforma creada por el Colegio de Escribanos de la Ciudad Autónoma de Buenos Aires, ofrecemos la posibilidad de gestionar documentos de forma remota, con firma digital y certificaciones electrónicas, evitando traslados innecesarios y optimizando tiempos. Digitalmente podemos: Certificar Firmas a Distancia, Certificar Firmas Digitales, Digitalizar certificaciones Ológrafas, Certificar Reproducciones Digitalmente, Expedir Constataciones Digitales."
       },
       "compraventa-inmuebles": {
-        "title": "Compraventa de Inmuebles",
-        "description": "La compraventa de inmuebles es uno de los actos más relevantes en una Escribanía. Te brindamos un acompañamiento integral en cada etapa, asegurando que la operación se realice con total seguridad jurídica, ya sea para comprar tu primera vivienda o realizar una inversión."
+        "title": "Operaciones Inmobiliarias",
+        "description": "Te brindamos un acompañamiento integral en cada etapa, asegurando que la operación se realice con total seguridad jurídica, ya sea para comprar tu primera vivienda o realizar una inversión, mediante la utilización de los diferentes alternativas, analizando los beneficios impositivos y legales. Para los Desarrollos Inmobiliarios, encontramos al fideicomiso como una herramienta versátil utilizada en diversos ámbitos, brindando seguridad y transparencia a todas las partes involucradas."
       },
       "constitucion-sociedades": {
-        "title": "Constitución de Sociedades",
-        "description": "Acompañamos a emprendedores y empresas locales y extranjeras en la constitución, modificación y disolución de sociedades. Te asesoramos en la elección del tipo societario más conveniente, incluyendo S.A., S.A.S., S.R.L. y otros modelos de organización empresarial."
+        "title": "Sociedades",
+        "description": "El área de Sociedades es la más experimentada de nuestra oficina, destacándose por haber enfrentado y superado desafíos significativos en el ámbito profesional, tales como inscripciones extranjeras, traslados de jurisdicción, transformaciones societarias, escisiones y fusiones. Nuestro objetivo es acompañar a emprendedores y empresas, tanto locales como extranjeras, en la constitución, modificación y disolución de sociedades. Ofrecemos asesoramiento integral en la elección del tipo societario más adecuado, incluyendo S.A., S.A.S., S.R.L. y otros modelos de organización empresarial. Además, contamos con un equipo especializado en Derecho Marcario, que vela por la protección de los derechos sobre marcas y patentes de nuestros clientes, realizando un seguimiento constante para garantizar su seguridad."
       },
       "fideicomisos": {
         "title": "Fideicomisos",
         "description": "El fideicomiso es una herramienta versátil utilizada en diversos ámbitos, especialmente en el sector inmobiliario. Se emplea para la adquisición de terrenos, desarrollo de proyectos y posterior comercialización, brindando seguridad y transparencia a todas las partes involucradas."
       },
       "planificacion-patrimonial": {
-        "title": "Planificación Patrimonial",
+        "title": "Planificación Sucesoria",
         "description": "Te orientamos en la planificación de tu patrimonio, asegurando que las donaciones y testamentos se ajusten a tus deseos y necesidades familiares. Analizamos cada caso para encontrar la mejor opción legal y brindar tranquilidad a quienes más te importan."
       },
       "actas-notariales": {
-        "title": "Actas Notariales",
-        "description": "Las actas notariales son documentos públicos que certifican hechos presenciados por el escribano. Son fundamentales para garantizar la veracidad y autenticidad de determinadas situaciones, aportando seguridad jurídica a quien las requiera."
+        "title": "Actas y Certificaciones Notariales",
+        "description": "Las actas notariales son documentos públicos que certifican hechos presenciados por el escribano. Son fundamentales para garantizar la veracidad y autenticidad de determinadas situaciones, aportando seguridad jurídica a quien las requiera. Además realizamos certificaciones de firmas, copias y documentos, garantizando su autenticidad y validez legal. Este servicio es fundamental para trámites administrativos, comerciales y jurídicos."
       },
       "poderes-notariales": {
         "title": "Poderes Notariales",
-        "description": "Un poder es un documento mediante el cual una persona autoriza a otra a actuar en su nombre. Te asesoramos en la redacción y otorgamiento de poderes generales o especiales, asegurando que se ajusten a tus necesidades."
+        "description": "Un poder es un documento mediante el cual una persona autoriza a otra a actuar en su nombre. Te asesoramos en la redacción y otorgamiento de poderes generales o especiales, asegurando que se ajusten a tus necesidades. En caso de que su utilización sea necesaria en el exterior, contamos con los procedimientos para garantizar su plena validez y el cumplimiento de los mismos efectos."
       },
       "contratos-privados": {
         "title": "Contratos Privados",
-        "description": "Redactamos y formalizamos contratos privados para diversas situaciones, como contratos de locación, préstamos (mutuos), donaciones de dinero y contradocumentos, garantizando su validez legal."
+        "description": "En nuestro estudio, nos especializamos en la redacción, formalización y asesoramiento de contratos privados adaptados a diversas necesidades legales. Entre los más comunes se encuentran: Contratos de Locación (alquileres de inmuebles o bienes), Contratos de Préstamo (Mutuos) (de dinero o bienes), Contratos de Donación (de dinero o bienes), Contradocumentos (para modificar o aclarar acuerdos previos). Nuestro objetivo es que todos los contratos sean completamente legales, transparentes y protejan los intereses de todas las partes involucradas. Con nuestra experiencia y compromiso, te brindamos la seguridad de que tus acuerdos privados estarán bien estructurados y respaldados por la ley."
       },
       "autorizaciones-permisos": {
         "title": "Autorizaciones y Permisos",

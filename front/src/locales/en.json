@@ -11,15 +11,15 @@
           "services": {
             "digital": {
               "title": "Digital Notarial Management",
-              "description": "Notarial procedures with digital signature and electronic certifications, without travel."
+              "description": "Notarial management with digital signature and electronic certifications, without translation."
             },
             "realEstate": {
               "title": "Real Estate Sales",
-              "description": "Support in the purchase and sale of properties with legal security."
+              "description": "Support in real estate developments, meeting each client's needs in the safest, most practical, and most cost-effective way. We offer all possible alternatives for each specific case."
             },
             "societies": {
               "title": "Company Formation",
-              "description": "Advice on creating and modifying companies such as S.A., S.A.S., and S.R.L."
+              "description": "S.A.S. y O.N.G.Specialists in the creation, modification, and restructuring of corporate structures for both local and foreign companies, including S.A., S.R.L., S.A.S., and N.G.O"
             },
             "trusts": {
               "title": "Trusts",
@@ -27,19 +27,19 @@
             },
             "estatePlanning": {
               "title": "Estate Planning",
-              "description": "Advice on donations and wills to ensure security and peace of mind."
+              "description": "Advice on early estate planning, through donations and wills, to ensure security, peace of mind, and tax benefits."
             },
             "notarialActs": {
-              "title": "Notarial Acts",
-              "description": "Legal certification of facts to safeguard rights and interests."
+              "title": "Notarial Acts & Certifications",
+              "description": "Legal certification of facts through Notarial Deeds to protect rights and interests. Certification of signatures and documents with authenticity and legal validity."
             },
             "powers": {
               "title": "Notarial Powers",
-              "description": "Drafting of general or special powers tailored to each need."
+              "description": "Granting of general or special powers tailored to each need, for local and international validity."
             },
             "privateContracts": {
               "title": "Private Contracts",
-              "description": "Formalization of lease, loan, and other legally valid agreements."
+              "description": "Drafting and analysis of lease agreements, loans, and other legally binding agreements."
             },
             "authorizations": {
               "title": "Authorizations and Permits",
@@ -98,7 +98,7 @@
     "detallesServicios": {
       "gestion-notarial-digital": {
         "title": "Digital Notarial Management",
-        "description": "Technology allows us to streamline and simplify notarial procedures without losing legal security. Through the platform created by the College of Notaries of Buenos Aires City, we offer the possibility of managing documents remotely, with digital signatures and electronic certifications, avoiding unnecessary travel and optimizing time."
+        "description": "Technology allows us to streamline and simplify notarial procedures without compromising legal security. Through the platform created by the College of Notaries of the Autonomous City of Buenos Aires, we offer the possibility of managing documents remotely, with digital signatures and electronic certifications, avoiding unnecessary travel and optimizing time. Digitally, we can certify signatures remotely, certify digital signatures, digitize holographic certifications, certify digital reproductions, and issue digital verifications."
       },
       "compraventa-inmuebles": {
         "title": "Real Estate Transactions",
@@ -106,7 +106,7 @@
       },
       "constitucion-sociedades": {
         "title": "Company Formation",
-        "description": "We support entrepreneurs and local and foreign companies in the incorporation, modification, and dissolution of companies. We advise on choosing the most suitable corporate type, including S.A., S.A.S., S.R.L., and other business organization models."
+        "description": "The Corporate Law department is the most experienced in our office, renowned for successfully handling significant challenges in the professional field, such as foreign registrations, jurisdiction transfers, corporate transformations, spin-offs, and mergers. Our goal is to support entrepreneurs and businesses, both local and international, in the formation, modification, and dissolution of companies. We provide comprehensive advice on selecting the most suitable corporate structure, including S.A., S.A.S., S.R.L., and other business organization models. In addition, we have a specialized team in Trademark Law, dedicated to safeguarding our clients' rights over trademarks and patents, offering continuous monitoring to ensure their protection."
       },
       "fideicomisos": {
         "title": "Trusts",
@@ -114,19 +114,19 @@
       },
       "planificacion-patrimonial": {
         "title": "Estate Planning",
-        "description": "We guide you in planning your estate, ensuring that donations and wills align with your wishes and family needs. We analyze each case to find the best legal option and provide peace of mind to your loved ones."
+        "description": "We guide you through your estate planning, ensuring that gifts and wills align with your family's wishes and needs. We analyze each case to find the best legal option and provide peace of mind for what matters most."
       },
       "actas-notariales": {
-        "title": "Notarial Acts",
-        "description": "Notarial acts are public documents that certify events witnessed by the notary. They are essential to guarantee the truthfulness and authenticity of certain situations, providing legal security to those who require them."
+        "title": "Notarial Acts & Certifications",
+        "description": "Notarial deeds are public documents that certify facts witnessed by a notary public. They are essential for guaranteeing the veracity and authenticity of certain situations, providing legal certainty to those who require them. We also certify signatures, copies, and documents, guaranteeing their authenticity and legal validity. This service is essential for administrative, commercial, and legal procedures."
       },
       "poderes-notariales": {
         "title": "Notarial Powers",
-        "description": "A power of attorney is a document through which one person authorizes another to act on their behalf. We provide guidance in drafting and granting general or special powers, ensuring they fit your needs."
+        "description": "A power of attorney is a document by which one person authorizes another to act on their behalf. We advise you on drafting and granting general or special powers of attorney, ensuring they meet your needs. In cases where they need to be used abroad, we have the procedures in place to ensure they are fully valid and fulfill the same purposes."
       },
       "contratos-privados": {
         "title": "Private Contracts",
-        "description": "We draft and formalize private contracts for various situations, such as lease agreements, loans (mutuals), money donations, and counter-documents, ensuring their legal validity."
+        "description": "At our firm, we specialize in drafting, formalizing, and advising on private contracts tailored to various legal needs. The most common contracts include: Lease Agreements (rental of real estate or property), Loan Agreements (for money or property), Gift Agreements (for money or property), Counter-documents (to modify or clarify previous agreements). Our goal is to ensure that all contracts are completely legal, transparent, and protect the interests of all parties involved. With our experience and commitment, we provide you with the assurance that your private agreements will be well-structured and backed by the law."
       },
       "autorizaciones-permisos": {
         "title": "Authorizations and Permits",
