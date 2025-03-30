@@ -12,6 +12,7 @@ import certificaciones from "../assets/certificaciones.jpeg";
 import actas from "../assets/actas.jpeg";
 import autorizaciones from "../assets/autorizaciones.jpeg";
 import Footer from "./Footer";
+import MarqueeCarousel from '../components/CarruselClientes';
 
 const ServicioDetalle = () => {
   const { servicioId } = useParams();
@@ -121,6 +122,18 @@ const ServicioDetalle = () => {
         >
           {t("servicio_detalle.volver_inicio")}
         </Link>
+      </div>
+
+      {/* Contenedor centrado del nuevo contenido */}
+      <div className="w-full flex flex-col items-center mt-12 p-6 md:p-12">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold">{t("trust.title")}</h2>
+          <span className="block w-72 h-1 bg-[#D1AE85] mt-2 mx-auto mb-6"></span>
+          <p className="text-lg text-gray-700 text-justify max-w-4xl mx-auto mb-12">
+            {t("trust.description")}
+          </p>
+        </div>
+        <MarqueeCarousel />
       </div>
     </div>
   );

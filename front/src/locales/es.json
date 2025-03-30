@@ -1,13 +1,13 @@
 {
     "hero": {
-      "title": "Escribanía - La Riva",
-      "subtitle": "Seguridad Jurídica",
+      "title": "Escribanía",
+      "subtitle": "La Riva",
       "button": "Busco asesoramiento",
       "unsupportedVideo": "Tu navegador no soporta videos."
     },
         "cards": {
           "title": "Servicios",
-          "description": "Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada trámite hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.",
+          "description": "Brindamos un servicio notarial de excelencia, combinando profesionalismo y calidez humana. Sabemos que detrás de cada negocio hay sueños y decisiones importantes. Por eso, acompañamos a personas y empresas con asesoramiento personalizado y contención, garantizando procesos claros, seguros y confiables.",
           "services": {
             "digital": {
               "title": "Gestión Notarial Digital",
@@ -53,20 +53,18 @@
     },
     "about": {
         "title": "¿Quiénes Somos?",
-        "description1": "Somos una escribanía con más de 10 años de experiencia en Derecho Societario y Registral, especializada en consultoría y asesoramiento ante organismos legales para empresas locales y extranjeras.",
-        "description2": "Trabajamos en conjunto con diversas áreas profesionales para ofrecer soluciones integrales y eficientes. Nuestro equipo, liderado por el Escribano Felipe La Riva junto a Rocío Torterola y María Celia Garcia Costero, combina modernidad y trayectoria en la función notarial.",
+        "description1": "Somos una escribanía con más de 10 años de experiencia en Derecho Societario y Registral, especializada en consultoría y asesoramiento tanto para empresas locales y extranjeras.",
+        "description2": "Trabajamos en conjunto con diversas áreas profesionales para ofrecer soluciones integrales y eficientes. Nuestro equipo, liderado por el Escribano Felipe La Riva junto a la Escribana Rocío Torterola combinan la modernidad y trayectoria en la función notarial.",
         "description3": "Nos comprometemos a brindar un servicio personalizado, garantizando seguridad jurídica con profesionalismo y confianza.",
         "collaborators": {
-            "title": "Colaboradores",
+            "title": "Profesionales Asociados",
             "description": "Creemos en el trabajo en equipo y en la importancia de rodearnos de profesionales que compartan nuestros valores de excelencia, confianza y compromiso.",
             "list": [
-                { "name": "Plan.Co", "link": "https://www.planco.ar/", "category": "Contable" },
-                { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Contable" },
-                { "name": "Estudio Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Contable" },
-                { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Derecho Marcario" },
-                { "name": "Marrac S.R.L.", "link": "https://www.marrac-srl.com/", "category": "Comercio Exterior" },
-                { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Comercio Exterior" },
-                { "name": "Yanina Leguizamon", "link": "#", "category": "Logística y Habilitaciones" }
+              { "name": "Fernando D´onofrio", "link": "#", "category": "Bienes Raíces" },
+              { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Contable" },
+              { "name": "Maria Florencia Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Contable" },
+              { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Derecho Marcario" },
+              { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Comercio Exterior" }
       ]
     }
   },
@@ -153,8 +151,8 @@
     "subtitulo": "Nos enorgullece acompañar a empresas y emprendedores en su crecimiento, brindando asesoramiento notarial con profesionalismo y compromiso. A lo largo de nuestra trayectoria, hemos trabajado con distintos sectores, ofreciendo soluciones adaptadas a cada necesidad. Aquí compartimos algunos de los clientes que han confiado en nosotros. Cada uno de ellos es parte de nuestra historia y del valor que buscamos aportar en cada gestión."
   },
   "trust": {
-    "title": "Confían en nosotros",
-    "description": "Nos enorgullece acompañar a empresas y emprendedores en su crecimiento, brindando asesoramiento notarial con profesionalismo y compromiso. A lo largo de nuestra trayectoria, hemos trabajado con distintos sectores, ofreciendo soluciones adaptadas a cada necesidad. Aquí compartimos algunos de los clientes que han confiado en nosotros. Cada uno de ellos es parte de nuestra historia y del valor que buscamos aportar en cada gestión."
+    "title": "Clientes Destacados",
+    "description": "Nos enorgullece acompañar a empresas y emprendedores en su crecimiento, brindando asesoramiento notarial con profesionalismo y compromiso. A lo largo de nuestra trayectoria, hemos trabajado con distintos sectores, ofreciendo soluciones adaptadas a cada necesidad. Aquí compartimos algunos de los clientes destacados que han confiado en nosotros. Cada uno de ellos es parte de nuestra historia y del valor que buscamos aportar en cada gestión."
   }
       
 }  

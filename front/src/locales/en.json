@@ -1,13 +1,13 @@
 {
     "hero": {
-      "title": "Escribanía - La Riva",
-      "subtitle": "Legal Security",
+      "title": "Escribanía",
+      "subtitle": "La Riva",
       "button": "I need advice",
       "unsupportedVideo": "Your browser does not support videos."
     },
         "cards": {
           "title": "Services",
-          "description": "We provide a notarial service of excellence, combining professionalism and human warmth. We understand that behind every procedure, there are dreams and important decisions. That’s why we support individuals and businesses with personalized advice and guidance, ensuring clear, secure, and reliable processes.",
+          "description": "We provide an exceptional notarial service, combining professionalism with a warm human approach. We understand that behind every bussines, there are dreams and important decisions. That’s why we support individuals and businesses with personalized advice and care, ensuring clear, secure, and reliable processes",
           "services": {
             "digital": {
               "title": "Digital Notarial Management",
@@ -52,21 +52,19 @@
           }
         },
             "about": {
-              "title": "Who We Are",
-              "description1": "We are a notary office with over 10 years of experience in Corporate and Registry Law, specializing in consultancy and legal advisory services for local and international companies.",
-              "description2": "We work together with professionals from different fields to offer comprehensive and efficient solutions. Our team, led by Notary Felipe La Riva along with Rocío Torterola and María Celia Garcia Costero, combines modernity and experience in the notarial function.",
-              "description3": "We are committed to providing a personalized service, ensuring legal security with professionalism and trust.",
+              "title": "About Us",
+              "description1": "We are a notary firm with over 10 years of experience in Corporate and Registry Law, specializing in consulting and advising both local and foreign companies.",
+              "description2": "We work in collaboration with various professional fields to offer comprehensive and efficient solutions. Our team, led by Notary Felipe La Riva and Notary Rocío Torterola, combines modernity and experience in notarial functions.",
+              "description3": "We are committed to providing personalized service, ensuring legal security with professionalism and trust",
               "collaborators": {
-                "title": "Staff",
+                "title": "External Partners",
                 "description": "We believe in teamwork and the importance of surrounding ourselves with professionals who share our values of excellence, trust, and commitment.",
                 "list": [
-                  { "name": "Plan.Co", "link": "https://www.planco.ar/", "category": "Accounting" },
+                  { "name": "Fernando D´onofrio", "link": "#", "category": "Real Estate" },
                   { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Accounting" },
-                  { "name": "Estudio Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Accounting" },
+                  { "name": "Maria Florencia Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Accounting" },
                   { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Trademark Law" },
-                  { "name": "Marrac S.R.L.", "link": "https://www.marrac-srl.com/", "category": "Foreign Trade" },
-                  { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Foreign Trade" },
-                  { "name": "Yanina Leguizamon", "link": "#", "category": "Logistics and Permits" }
+                  { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Foreign Trade" }
                 ]
               }
             },
@@ -150,8 +148,8 @@
         "contacto": "Contact"
   },
   "trust": {
-    "title": "Our Clients",
-    "description": "We take pride in supporting businesses and entrepreneurs in their growth, providing notarial advisory services with professionalism and commitment. Throughout our journey, we have worked with various sectors, offering tailored solutions to meet each need. Here, we share some of the clients who have placed their trust in us. Each of them is part of our history and the value we strive to bring to every transaction."
+    "title": "Featured Clients",
+    "description": "We are proud to support businesses and entrepreneurs in their growth, providing notarial advice with professionalism and commitment. Throughout our history, we have worked  with various sectors, offering solutions tailored to each need. Here we share some of the outstanding clients who have placed their trust in us. Each of them is part of our history and the value we seek to bring to each project."
   }
 }  
   
