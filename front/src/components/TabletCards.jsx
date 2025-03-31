@@ -2,32 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Servicios from "./Servicios";
-import imagenGenerica from "../assets/inmobiliaria.jpg";
-import digital from "../assets/digital.jpeg";
 import poderes from "../assets/poderes.jpeg";
-import sociedades from "../assets/sociedades.jpeg";
 import fideicomisos from "../assets/fideicomisos.jpeg";
 import patrimonio from "../assets/patrimonio.jpeg";
 import contratos from "../assets/contratos.jpeg";
-import certificaciones from "../assets/certificaciones.jpeg";
+import lawyer from "../assets/lawyer.jpeg";
 import actas from "../assets/actas.jpeg";
 import autorizaciones from "../assets/autorizaciones.jpeg";
+import imagenGenerica from "../assets/bsas1.jpeg";
 
 const CardsTablet = () => {
   const { t } = useTranslation();
 
   const projectData = [
-    { id: "gestion-notarial-digital", image: digital, title: t("cards.services.digital.title"), description: t("cards.services.digital.description") },
+    { id: "gestion-notarial-digital", image: poderes, title: t("cards.services.digital.title"), description: t("cards.services.digital.description") },
     { id: "compraventa-inmuebles", image: imagenGenerica, title: t("cards.services.realEstate.title"), description: t("cards.services.realEstate.description") },
-    { id: "constitucion-sociedades", image: sociedades, title: t("cards.services.societies.title"), description: t("cards.services.societies.description") },
-    { id: "fideicomisos", image: fideicomisos, title: t("cards.services.trusts.title"), description: t("cards.services.trusts.description") },
+    { id: "constitucion-sociedades", image: fideicomisos, title: t("cards.services.societies.title"), description: t("cards.services.societies.description") },
     { id: "planificacion-patrimonial", image: patrimonio, title: t("cards.services.estatePlanning.title"), description: t("cards.services.estatePlanning.description") },
     { id: "actas-notariales", image: actas, title: t("cards.services.notarialActs.title"), description: t("cards.services.notarialActs.description") },
-    { id: "poderes-notariales", image: poderes, title: t("cards.services.powers.title"), description: t("cards.services.powers.description") },
+    { id: "poderes-notariales", image: lawyer, title: t("cards.services.powers.title"), description: t("cards.services.powers.description") },
     { id: "contratos-privados", image: contratos, title: t("cards.services.privateContracts.title"), description: t("cards.services.privateContracts.description") },
     { id: "autorizaciones-permisos", image: autorizaciones, title: t("cards.services.authorizations.title"), description: t("cards.services.authorizations.description") },
-    { id: "certificaciones-notariales", image: certificaciones, title: t("cards.services.certifications.title"), description: t("cards.services.certifications.description") },
-  ];
+  ];  
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
