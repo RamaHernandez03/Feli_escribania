@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import imagenGenerica from "../assets/inmobiliaria.jpg";
-import digital from "../assets/digital.jpeg";
 import poderes from "../assets/poderes.jpeg";
-import sociedades from "../assets/sociedades.jpeg";
 import fideicomisos from "../assets/fideicomisos.jpeg";
 import patrimonio from "../assets/patrimonio.jpeg";
 import contratos from "../assets/contratos.jpeg";
-import certificaciones from "../assets/certificaciones.jpeg";
+import lawyer from "../assets/lawyer.jpeg";
 import actas from "../assets/actas.jpeg";
 import autorizaciones from "../assets/autorizaciones.jpeg";
+import imagenGenerica from "../assets/bsas1.jpeg";
 import Footer from "./Footer";
 import MarqueeCarousel from '../components/CarruselClientes';
 
@@ -21,7 +19,7 @@ const ServicioDetalle = () => {
   const serviciosData = {
     "gestion-notarial-digital": {
       title: t("detallesServicios.gestion-notarial-digital.title"),
-      image: digital,
+      image: poderes,
       description: t("detallesServicios.gestion-notarial-digital.description"),
     },
     "compraventa-inmuebles": {
@@ -31,7 +29,7 @@ const ServicioDetalle = () => {
     },
     "constitucion-sociedades": {
       title: t("detallesServicios.constitucion-sociedades.title"),
-      image: sociedades,
+      image: fideicomisos,
       description: t("detallesServicios.constitucion-sociedades.description"),
     },
     "fideicomisos": {
@@ -51,7 +49,7 @@ const ServicioDetalle = () => {
     },
     "poderes-notariales": {
       title: t("detallesServicios.poderes-notariales.title"),
-      image: poderes,
+      image: lawyer,
       description: t("detallesServicios.poderes-notariales.description"),
     },
     "contratos-privados": {
@@ -63,11 +61,6 @@ const ServicioDetalle = () => {
       title: t("detallesServicios.autorizaciones-permisos.title"),
       image: autorizaciones,
       description: t("detallesServicios.autorizaciones-permisos.description"),
-    },
-    "certificaciones-notariales": {
-      title: t("detallesServicios.certificaciones-notariales.title"),
-      image: certificaciones,
-      description: t("detallesServicios.certificaciones-notariales.description"),
     },
   };
 
