@@ -14,6 +14,8 @@ import purafrutta from "../assets/purafrutta.svg";
 import marrac from "../assets/marrac.avif";
 import pronto from "../assets/pronto.png";
 import golf from "../assets/golf.png";
+import pirca from "../assets/pirca.png";
+import cruzando from "../assets/cruzando.png";
 import proyectoabismal from "../assets/proyectoabismal.png";
 
 const logosClientes = [
@@ -31,6 +33,8 @@ const logosClientes = [
   { src: pronto, link: "https://prontoelectrica.com.ar/" },
   { src: golf, link: "https://www.instagram.com/oxigenogolfexperience/" },
   { src: proyectoabismal, link: "https://www.instagram.com/proyectoabismal/" },
+  { src: pirca, link: "https://pircaproducciones.com/" },
+  { src: cruzando, link: "https://www.cruzandoelcharco.com.ar/" },
 
 ];
 

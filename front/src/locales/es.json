@@ -60,10 +60,10 @@
             "title": "Profesionales Asociados",
             "description": "Creemos en el trabajo en equipo y en la importancia de rodearnos de profesionales que compartan nuestros valores de excelencia, confianza y compromiso.",
             "list": [
-              { "name": "Fernando D´onofrio", "link": "#", "category": "Bienes Raíces" },
+              { "name": "Fernando Donofrio", "link": "#", "category": "Bienes Raíces" },
               { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Contable" },
               { "name": "Maria Florencia Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Contable" },
-              { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Derecho Marcario" },
+              { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Abogada Corporativa" },
               { "name": "Mariano Martinuzzi", "link": "https://www.linkedin.com/in/mariano-martinuzzi/", "category": "Comercio Exterior" }
       ]
     }
