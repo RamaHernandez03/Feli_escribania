@@ -21,10 +21,10 @@ const Hero = ({ scrollToServicios }) => {
 
       <div className="absolute inset-0 bg-[#222222] opacity-80"></div>
       <div className="z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-[#F5F1EB] font-semibold font-serif tracking-wide">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl text-[#F5F1EB] font-semibold font-serif tracking-wide">
           {t("hero.title")}
         </h1>
-        <h2 className="text-xl sm:text-2xl font-serif md:text-4xl lg:text-5xl text-[#D1AE85] tracking-wider mt-2 sm:mt-4">
+        <h2 className="text-2xl sm:text-3xl font-serif md:text-5xl lg:text-5xl text-[#D1AE85] tracking-wider mt-2 sm:mt-4">
           {t("hero.subtitle")}
         </h2>
       </div>
