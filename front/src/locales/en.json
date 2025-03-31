@@ -31,7 +31,7 @@
             },
             "notarialActs": {
               "title": "Notarial Acts & Certifications",
-              "description": "Legal certification of facts through Notarial Deeds to protect rights and interests. Certification of signatures and documents with authenticity and legal validity."
+              "description": "Legal certification of facts, signatures, and documents with legal validity."
             },
             "powers": {
               "title": "Notarial Powers",
@@ -60,7 +60,7 @@
                 "title": "External Partners",
                 "description": "We believe in teamwork and the importance of surrounding ourselves with professionals who share our values of excellence, trust, and commitment.",
                 "list": [
-                  { "name": "Fernando D´onofrio", "link": "#", "category": "Real Estate" },
+                  { "name": "Fernando Donofrio", "link": "#", "category": "Real Estate" },
                   { "name": "Ignacio Alu", "link": "https://www.linkedin.com/in/ignacioalu/", "category": "Accounting" },
                   { "name": "Maria Florencia Díaz Molina", "link": "https://www.linkedin.com/in/maria-florencia-diaz-molina-933291189/", "category": "Accounting" },
                   { "name": "Gisela Ríos", "link": "https://www.linkedin.com/in/gisela-rios-03b399159/", "category": "Trademark Law" },
