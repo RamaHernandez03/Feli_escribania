@@ -104,7 +104,7 @@ const ServicioDetalle = () => {
         />
 
         <a
-          href="https://calendar.app.google/RVYL9DbfX7FAB7BB7"
+          href="https://calendar.app.google/tc3YvbjyyMXdHEWV8"
           className="text-white bg-[#D1AE85] hover:bg-[#A67C52] transition font-bold py-2 px-4 rounded-lg block w-full max-w-lg mx-auto mb-4 text-center"
         >
           {t("servicio_detalle.agendar_turno")}
