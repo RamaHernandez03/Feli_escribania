@@ -18,6 +18,8 @@ import pirca from "../assets/pirca.png";
 import cruzando from "../assets/cruzando.png";
 import proyectoabismal from "../assets/proyectoabismal.png";
 
+/*
+
 const logosClientes = [
   { src: reason, link: "https://www.instagram.com/reason_prod/" },
   { src: purafrutta, link: "https://purafrutta.com/" },
@@ -35,6 +37,28 @@ const logosClientes = [
   { src: proyectoabismal, link: "https://www.instagram.com/proyectoabismal/" },
   { src: pirca, link: "https://pircaproducciones.com/" },
   { src: cruzando, link: "https://www.cruzandoelcharco.com.ar/" },
+
+];
+
+*/
+
+const logosClientes = [
+  { src: reason, link: "https://www.instagram.com/reason_prod/" },
+  { src: purafrutta, link: "https://purafrutta.com/" },
+  { src: plantBasedFood, link: "https://vegabundancia.com/" },
+  { src: thermo, link: "https://thermoquality.cl/" },
+  { src: westMall, link: "https://www.instagram.com/somoswestmall/" },
+  { src: poolGroup, link: "https://www.instagram.com/poolgroup.piscinas/" },
+  { src: apdeca, link: "https://www.apdeca.org/" },
+  { src: dakotta, link: "https://www.apdeca.org/" },
+  { src: hurling, link: "https://www.instagram.com/materialesdakotta/" },
+  { src: golf, link: "https://www.instagram.com/oxigenogolfexperience/" },
+  { src: proyectoabismal, link: "https://www.instagram.com/proyectoabismal/" },
+  { src: pirca, link: "https://pircaproducciones.com/" },
+  { src: pronto, link: "https://prontoelectrica.com.ar/" },
+  { src: marrac, link: "https://www.marrac-srl.com/" },
+  { src: cruzando, link: "https://www.cruzandoelcharco.com.ar/" },
+  { src: bcno, link: "https://www.grupobnco.com/" },
 
 ];
 
