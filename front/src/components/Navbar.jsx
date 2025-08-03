@@ -30,23 +30,35 @@ const Nav = () => {
   }, [location]);
 
   const handleNavigation = (path, id) => {
-    if (location.pathname === "/") {
-      setTimeout(() => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 100);
+    if (id) {
+      if (location.pathname === "/") {
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      } else {
+        navigate(path);
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 500);
+      }
     } else {
-      navigate(path);
-      setTimeout(() => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 500);
+      navigate(path); // Para rutas como "/formulario"
     }
   };
+
+  const navItems = [
+    { name: language === "es" ? "Inicio" : "Home", path: "/", id: "hero" },
+    { name: language === "es" ? "Servicios" : "Services", path: "/", id: "cards" },
+    { name: language === "es" ? "Nosotros" : "About Us", path: "/", id: "nosotros" },
+    { name: language === "es" ? "Contacto" : "Contact", path: "/", id: "contacto" },
+    { name: language === "es" ? "Formulario Legal" : "Legal Form", path: "/formulario", id: null }, // Nuevo ítem
+  ];
 
   return (
     <nav
@@ -58,12 +70,7 @@ const Nav = () => {
         <img src={scroll ? LogoFeli : LogoNegro} alt="Logo" className="h-full transition-all duration-300" />
       </div>
       <ul className="flex space-x-4 md:space-x-6 font-semibold items-center">
-        {[
-          { name: language === "es" ? "Inicio" : "Home", path: "/", id: "hero" },
-          { name: language === "es" ? "Servicios" : "Services", path: "/", id: "cards" },
-          { name: language === "es" ? "Nosotros" : "About Us", path: "/", id: "nosotros" },
-          { name: language === "es" ? "Contacto" : "Contact", path: "/", id: "contacto" },
-        ].map((item, index) => (
+        {navItems.map((item, index) => (
           <li key={index} className="relative cursor-pointer">
             <button
               onClick={() => handleNavigation(item.path, item.id)}
@@ -73,7 +80,6 @@ const Nav = () => {
             </button>
           </li>
         ))}
-        {/* Switch de idioma */}
         <li className="relative cursor-pointer">
           <LanguageSwitcher />
         </li>

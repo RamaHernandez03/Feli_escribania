@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FooterMobile from "./FooterMobile";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -11,6 +11,8 @@ const SecondNavBar = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScroll(window.scrollY > 50);
@@ -22,12 +24,31 @@ const SecondNavBar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleScrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const handleNavigation = (path, id) => {
+    if (id) {
+      if (location.pathname === "/") {
+        // Si ya estamos en home, solo hacer scroll
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      } else {
+        // Si estamos en otra página, navegar primero y luego hacer scroll
+        navigate(path);
+        setTimeout(() => {
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 500);
+      }
+    } else {
+      // Para rutas como "/formulario"
+      navigate(path);
     }
-    toggleMenu();
+    toggleMenu(); // Cerrar el menú después de la navegación
   };
 
   return (
@@ -53,15 +74,20 @@ const SecondNavBar = () => {
           </button>
           <div className="flex flex-col items-center justify-center flex-grow">
             <ul className="text-4xl space-y-8 font-bold w-full">
-              {[{ name: t("navbar.inicio"), id: "hero" }, { name: t("navbar.servicios"), id: "cards" }, { name: t("navbar.nosotros"), id: "nosotros" }, { name: t("navbar.contacto"), id: "contacto" }].map((item, index) => (
+              {[
+                { name: t("navbar.inicio"), id: "hero", path: "/" },
+                { name: t("navbar.servicios"), id: "cards", path: "/" },
+                { name: t("navbar.nosotros"), id: "nosotros", path: "/" },
+                { name: t("navbar.contacto"), path: "/", id: "contacto" },
+                { name: t("navbar.formulario"), id: null, path: "/formulario" },
+              ].map((item, index) => (
                 <li key={index} className="w-full">
-                  <Link
-                    to="/"
-                    onClick={() => handleScrollToSection(item.id)}
-                    className="block w-full text-center py-2 hover:bg-[#D1AE85] transition-all duration-300"
+                  <button
+                    onClick={() => handleNavigation(item.path, item.id)}
+                    className="block w-full text-center py-2 hover:bg-[#D1AE85] transition-all duration-300 bg-transparent border-none text-inherit cursor-pointer"
                   >
                     {item.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

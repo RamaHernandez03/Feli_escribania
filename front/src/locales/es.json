@@ -144,7 +144,8 @@
           "inicio": "Inicio",
           "servicios": "Servicios",
           "nosotros": "Nosotros",
-          "contacto": "Contacto"
+          "contacto": "Contacto",
+          "formulario": "Formulario Legal"
         },
   "clientes": {
     "titulo": "Confian en nosotros",

@@ -145,7 +145,8 @@
         "inicio": "Home",
         "servicios": "Services",
         "nosotros": "About Us",
-        "contacto": "Contact"
+        "contacto": "Contact",
+        "formulario": "Legal Form"
   },
   "trust": {
     "title": "Featured Clients",

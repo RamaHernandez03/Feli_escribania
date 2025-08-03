@@ -11,12 +11,11 @@ import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
 import FooterMobile from "./components/FooterMobile";
 import ServicioDetalle from "./components/ServicioDetalle";
+import UIFLegalForm from "./components/UIFLegalForm";
 import "./i18n";
-import "primereact/resources/themes/lara-light-blue/theme.css";  // Tema
-import "primereact/resources/primereact.min.css";  // Estilos generales
-import "primeicons/primeicons.css";  // Íconos
-
-        
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -40,10 +39,9 @@ function App() {
   }, []);
 
   return (
-    <LanguageProvider> {/* 🔹 Envolvemos todo en el LanguageProvider */}
+    <LanguageProvider>
       <Router>
         {isMobile ? <SecondNavBar /> : <Nav />}
-        
         <Routes>
           <Route
             path="/"
@@ -60,6 +58,7 @@ function App() {
             }
           />
           <Route path="/servicios/:servicioId" element={<ServicioDetalle />} />
+          <Route path="/formulario" element={<UIFLegalForm />} /> {/* Nueva ruta del formulario */}
         </Routes>
       </Router>
     </LanguageProvider>
