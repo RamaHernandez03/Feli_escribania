@@ -1262,11 +1262,16 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
     />
   </div>
 </div>
-<div className="mt-8 bg-white/50 p-6 rounded-lg border-l-4 border-[#A67C52] shadow-md">
-  <h4 className="text-lg font-bold text-gray-800 mb-4">🛡️ Declaraciones Juradas</h4>
-  <span className="block w-48 h-1 bg-[#A67C52] mb-4"></span>
-  
-  <div className="mt-6">
+
+            {/* Declaración UIF */}
+            <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
+              <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
+                <span className="text-3xl">⚠️</span>
+                Declaraciones juradas - U.I.F
+              </h3>
+              <span className="block w-48 h-1 bg-red-500 mb-6"></span>
+              
+              <div className="mt-6">
   <p className="text-sm mb-4">
     ¿Se encuentra incluido/a bajo la condición de <strong>Sujeto Obligado</strong> ante la UIF según el art. 20 de la Ley 25.246? (<a href="https://www.argentina.gob.ar/unidadinformacionfinanciera/funciones/sujetos-obligados" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Ver listado</a>)
   </p>
@@ -1289,10 +1294,33 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
   </select>
   </div>
 
-  <div className="text-xs text-gray-600 mt-4">
+  <div className="text-xs text-gray-600 mt-4 mb-4">
     Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.
   </div>
-</div>
+  
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
+                <p className="text-sm text-red-800 font-medium">
+                  <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
+                </p>
+              </div>
+
+              <div className="space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    name="aceptoTerminos"
+                    id="aceptoTerminos"
+                    required
+                    className="w-4 h-4 accent-red-500"
+                  />
+                  <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
+                    Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
+                  </label>
+                  
+                </div>
+              </div>
+            </div>
 
 
  
@@ -1557,7 +1585,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                 </div>
 
                 {/* Representantes Legales */}
-                <div className="mt-8 bg-white/50 p-6 rounded-lg border-l-4 border-[#D1AE85]">
+                <div className="mt-8 bg-white/50 p-6 rounded-lg border-l-4 border-[#D1AE85] shadow-md">
                   <h4 className="text-lg font-bold text-gray-800 mb-4">👥 Representantes Legales/Apoderados</h4>
                   <span className="block w-60 h-1 bg-[#D1AE85] mb-4"></span>
                   <button
@@ -1569,8 +1597,8 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                   </button>
                   
                   {representatives.map((rep) => (
-                    <div key={rep.id} className="bg-white p-6 rounded-lg mb-6 border-2 border-gray-100 shadow-sm">
-                      <div className="flex justify-between items-center mb-4">
+                    <div key={rep.id} className="bg-white p-6 rounded-lg mb-6 border-2 border-gray-100 shadow-sm ">
+                      <div className="flex justify-between items-center mb-4 ">
                         <h5 className="font-bold text-gray-800">👤 Representante Legal/Apoderado #{rep.id}</h5>
                         <button
                           type="button"
@@ -1642,7 +1670,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                 </div>
 
                 {/* Detalle de Documentación Aportada */}
-                <div className="mt-8 bg-white/50 p-6 rounded-lg border-l-4 border-[#A67C52]">
+                <div className="mt-8 bg-white/50 p-6 rounded-lg border-l-4 border-[#A67C52] shadow-md">
                   <h4 className="text-lg font-bold text-gray-800 mb-4">📄 Detalle de Documentación Aportada</h4>
                   <span className="block w-64 h-1 bg-[#A67C52] mb-4"></span>
                   
@@ -1681,11 +1709,9 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                     <FilePreview files={uploadedFiles.documentacionJuridica} inputId="documentacionJuridica" isEmbedded={true} />
                   </div>
                 </div>
-              </div>
-            )}
 
-            {/* Declaración UIF */}
-            <div className="bg-white/80 p-6 rounded-lg border-l-4 border-red-500 shadow-md">
+                            {/* Declaración UIF */}
+            <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
               <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
                 <span className="text-3xl">⚠️</span>
                 Declaraciones juradas - U.I.F
@@ -1694,7 +1720,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
               
               <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
                 <p className="text-sm text-red-800 font-medium">
-                  <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
+                  <strong>Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.</strong>
                 </p>
               </div>
 
@@ -1714,6 +1740,8 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                 </div>
               </div>
             </div>
+              </div>
+            )}
 
             {/* Botones de acción */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">

@@ -1,0 +1,30 @@
+            {/* Declaración UIF */}
+            <div className="bg-white/80 p-6 rounded-lg border-l-4 border-red-500 shadow-md">
+              <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
+                <span className="text-3xl">⚠️</span>
+                Declaraciones juradas - U.I.F
+              </h3>
+              <span className="block w-48 h-1 bg-red-500 mb-6"></span>
+              
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
+                <p className="text-sm text-red-800 font-medium">
+                  <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
+                </p>
+              </div>
+
+              <div className="space-y-4">
+
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    name="aceptoTerminos"
+                    id="aceptoTerminos"
+                    required
+                    className="w-4 h-4 accent-red-500"
+                  />
+                  <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
+                    Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
+                  </label>
+                </div>
+              </div>
+            </div>

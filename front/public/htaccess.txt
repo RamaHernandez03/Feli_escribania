@@ -1,3 +1,10 @@
 RewriteEngine On
+
+# Redirección 301 de dominio sin www a www
 RewriteCond %{HTTP_HOST} ^escribanialariva\.com [NC]
 RewriteRule ^(.*)$ https://www.escribanialariva.com/$1 [L,R=301]
+
+# Soporte para rutas internas de React
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
