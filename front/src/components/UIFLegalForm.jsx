@@ -700,7 +700,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">Formulario Legal UIF</h1>
+            <h1 className="text-5xl font-bold mb-4">Ingreso de clientes</h1>
             <p className="text-xl">Formulario para Personas Físicas y Jurídicas</p>
           </div>
         </div>
@@ -1273,7 +1273,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
               
               <div className="mt-6">
   <p className="text-sm mb-4">
-    ¿Se encuentra incluido/a bajo la condición de <strong>Sujeto Obligado</strong> ante la UIF según el art. 20 de la Ley 25.246? (<a href="https://www.argentina.gob.ar/unidadinformacionfinanciera/funciones/sujetos-obligados" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Ver listado</a>)
+    ¿Se encuentra incluido/a bajo la condición de <strong>Sujeto Obligado</strong> enumerados en el art. 20 de la Ley 25.246 y sus modificatorias sobre "Encubrimiento y Lavado de Activos" que he leído? 
   </p>
 
   <select name="sujetoUIF" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
@@ -1284,7 +1284,7 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
   </div>
   <div className="mt-6">
   <p className="text-sm mb-4">
-    ¿Se encuentra incluido/a bajo la condición de <strong>Persona Expuesta Políticamente (PEP)</strong> según el art. 35 de la Ley 25.246? (<a href="https://www.argentina.gob.ar/normativa/nacional/resol-2023-35-388862" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Ver resolución</a>)
+    ¿Se encuentra incluido y/o comprendido bajo la condición de PERSONA EXPUESTA POLÍTICAMENTE (PEP) ante la UIF enumerados en el art.35 de la Ley 25.246 y sus modificatorias RESOLUCIÓN UIF N° RESOL-2023-35?
   </p>
 
   <select name="esPEP" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
@@ -1294,11 +1294,8 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
   </select>
   </div>
 
-  <div className="text-xs text-gray-600 mt-4 mb-4">
-    Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.
-  </div>
   
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
+              <div className="bg-red-50 border-2 mt-6 border-red-200 rounded-lg p-6 mb-6">
                 <p className="text-sm text-red-800 font-medium">
                   <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
                 </p>
@@ -1319,6 +1316,9 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                   </label>
                   
                 </div>
+                <div className="text-xs text-gray-600 mt-4 mb-4">
+    Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.
+  </div>
               </div>
             </div>
 
