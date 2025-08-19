@@ -100,10 +100,24 @@ const UIFLegalForm = () => {
     );
   };
 
+  // En tu componente React, agrega validación de tamaño
+  const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
+
   // Función para manejar carga de archivos
   const handleFileUpload = (event, inputId) => {
     const files = event.target.files;
     if (files && files.length > 0) {
+              // Validar tamaño total
+              let totalSize = 0;
+              Array.from(files).forEach(file => {
+                  totalSize += file.size;
+              });
+              
+              if (totalSize > MAX_FILE_SIZE) {
+                  showStatus('Los archivos seleccionados son demasiado grandes. Máximo 20MB total.', 'error');
+                  event.target.value = '';
+                  return;
+              }
         setUploadedFiles(prev => {
             const existingFiles = prev[inputId] ? Array.from(prev[inputId]) : [];
             const newFiles = Array.from(event.target.files);
@@ -658,7 +672,7 @@ const sendEmail = async (formData, pdfBlob) => {
     // Realizar la petición al script PHP con mejor manejo de errores
     let response;
     try {
-      response = await fetch('http://localhost:5000/send_email.php', {
+      response = await fetch('/send_email.php', {
         method: 'POST',
         body: formDataToSend,
         mode: 'cors', // Importante para CORS

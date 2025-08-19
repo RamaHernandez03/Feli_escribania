@@ -1,182 +1,113 @@
 <?php
-// send_email.php - Versión corregida con sintaxis correcta
-
-header('Access-Control-Allow-Origin: http://localhost:3000'); // Tu puerto de React
+// send_email.php - Versión Gmail SMTP
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
 
-// Para requests de tipo preflight
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
-// Configuración de errores
 error_reporting(E_ALL);
-ini_set('display_errors', 0); // No mostrar errores en producción
+ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/email_errors.log');
 
-// Función para loguear errores
 function logError($message) {
     error_log(date('Y-m-d H:i:s') . " - " . $message . PHP_EOL, 3, __DIR__ . '/email_errors.log');
 }
 
-// Función para enviar respuesta JSON
 function sendJsonResponse($data, $statusCode = 200) {
     http_response_code($statusCode);
     header('Content-Type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type');
-    
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// Verificar que sea POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     logError("Método no permitido: " . $_SERVER['REQUEST_METHOD']);
     sendJsonResponse(['success' => false, 'error' => 'Método no permitido'], 405);
 }
 
-// Cargar PHPMailer ANTES del try-catch
+// Cargar PHPMailer
 require_once __DIR__ . '/PHPMailer-master/src/Exception.php';
 require_once __DIR__ . '/PHPMailer-master/src/PHPMailer.php';
 require_once __DIR__ . '/PHPMailer-master/src/SMTP.php';
 
-// Declaraciones use DESPUÉS de los require
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 try {
-    // Log del inicio
     logError("Iniciando proceso de envío de email");
     
-    // Verificar que PHPMailer existe
-    $phpmailerPath = __DIR__ . '/PHPMailer-master/src/PHPMailer.php';
-    if (!file_exists($phpmailerPath)) {
-        logError("PHPMailer no encontrado en: " . $phpmailerPath);
-        throw new Exception('PHPMailer no está instalado correctamente');
-    }
+    // Verificar límites de archivo
+    $maxFileSize = 25 * 1024 * 1024; // 25MB máximo
     
-    logError("PHPMailer encontrado correctamente");
-
-    // Log de datos recibidos
-    logError("POST data keys: " . implode(', ', array_keys($_POST)));
-    logError("FILES data keys: " . implode(', ', array_keys($_FILES)));
-    
-    // Verificar que se recibieron los datos
-    if (!isset($_POST['formData'])) {
-        logError("No se recibió formData");
-        throw new Exception('No se recibieron los datos del formulario');
-    }
-    
-    if (!isset($_FILES['pdfFile'])) {
-        logError("No se recibió pdfFile");
-        throw new Exception('No se recibió el archivo PDF');
+    if (!isset($_POST['formData']) || !isset($_FILES['pdfFile'])) {
+        throw new Exception('Datos del formulario o archivo PDF faltantes');
     }
 
-    // Obtener datos del formulario
+    if ($_FILES['pdfFile']['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception('Error en la carga del archivo PDF');
+    }
+
+    if ($_FILES['pdfFile']['size'] > $maxFileSize) {
+        throw new Exception('El archivo PDF es demasiado grande. Máximo 25MB permitido.');
+    }
+
     $formData = json_decode($_POST['formData'], true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-        logError("Error JSON: " . json_last_error_msg());
-        throw new Exception('Error al decodificar los datos JSON del formulario: ' . json_last_error_msg());
+        throw new Exception('Error al decodificar los datos del formulario');
     }
 
-    logError("Form data decoded successfully");
-
-    // Obtener nombre del cliente
     $clientName = isset($formData['tipoPersona']) && $formData['tipoPersona'] === 'fisica' 
         ? ($formData['nombre'] ?? 'Cliente') 
         : ($formData['razonSocial'] ?? 'Empresa');
 
-    logError("Cliente: " . $clientName);
-
-    // Verificar que se haya enviado el archivo PDF
-    if ($_FILES['pdfFile']['error'] !== UPLOAD_ERR_OK) {
-        $uploadError = $_FILES['pdfFile']['error'];
-        logError("Error en upload de PDF: " . $uploadError);
-        
-        $uploadErrors = [
-            UPLOAD_ERR_INI_SIZE => 'El archivo excede el tamaño máximo permitido por PHP',
-            UPLOAD_ERR_FORM_SIZE => 'El archivo excede el tamaño máximo del formulario',
-            UPLOAD_ERR_PARTIAL => 'El archivo se subió parcialmente',
-            UPLOAD_ERR_NO_FILE => 'No se subió ningún archivo',
-            UPLOAD_ERR_NO_TMP_DIR => 'Falta la carpeta temporal',
-            UPLOAD_ERR_CANT_WRITE => 'Error escribiendo el archivo al disco',
-            UPLOAD_ERR_EXTENSION => 'Subida detenida por extensión'
-        ];
-        
-        $errorMsg = $uploadErrors[$uploadError] ?? 'Error desconocido en la subida';
-        throw new Exception('Error en la carga del archivo PDF: ' . $errorMsg);
-    }
-
     $pdfFile = $_FILES['pdfFile'];
     logError("PDF file size: " . $pdfFile['size'] . " bytes");
 
-    // Crear instancia de PHPMailer
     $mail = new PHPMailer(true);
-    logError("PHPMailer instance created");
 
-    // Configuración del servidor SMTP
+    // Configuración SMTP para Gmail
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
-    $mail->SMTPAuth   = true;
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
     
-    // CREDENCIALES - CAMBIAR POR LAS TUYAS
-    $emailFrom = 'felipelariva@gmail.com';
-    $emailPassword = 'bgkkehuzwuyardtv'; // Password de aplicación
+    $emailFrom = 'felipelariva@gmail.com'; 
+    $emailPassword = 'bgkkehuzwuyardtv';
     $emailTo = 'felipelariva@gmail.com';
     
-    $mail->Username   = $emailFrom;
-    $mail->Password   = $emailPassword;
+    $mail->Username = $emailFrom;
+    $mail->Password = $emailPassword;
     
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port       = 465;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL
+    $mail->Port = 465;
     
-    // Configuración adicional para debugging
-    $mail->SMTPDebug = 0; // Cambiar a 2 para debug completo
-    $mail->Debugoutput = function($str, $level) {
-        logError("SMTP Debug: " . $str);
-    };
+    $mail->SMTPDebug = 0;
 
-    logError("SMTP configuration set");
-
-    // Configuración del email
     $mail->setFrom($emailFrom, 'Escribanía La Riva - Sistema de Formularios');
     $mail->addAddress($emailTo, 'Dr. La Riva');
 
-    // Asunto
     $tipoPersona = $formData['tipoPersona'] === 'fisica' ? 'Persona Física' : 'Persona Jurídica';
     $mail->Subject = "Nuevo Formulario UIF - {$tipoPersona} - {$clientName}";
 
-    logError("Email configuration set");
-
-    // Generar cuerpo HTML del email
     $fechaActual = date('d/m/Y H:i:s');
     $emailBody = generateEmailBody($formData, $clientName, $tipoPersona, $fechaActual);
     
     $mail->isHTML(true);
     $mail->Body = $emailBody;
 
-    logError("Email body generated");
-
-    // Adjuntar el archivo PDF
     $fileName = 'Formulario_UIF_' . preg_replace('/[^A-Za-z0-9_-]/', '_', $clientName) . '_' . date('Y-m-d') . '.pdf';
     $mail->addAttachment($pdfFile['tmp_name'], $fileName, 'base64', 'application/pdf');
 
-    logError("PDF attachment added: " . $fileName);
-
-    // Enviar el email
-    logError("Attempting to send email...");
-    
     if ($mail->send()) {
         logError("Email sent successfully");
         sendJsonResponse([
             'success' => true, 
-            'message' => 'Formulario enviado exitosamente por email a ' . $emailTo,
+            'message' => 'Formulario enviado exitosamente por email',
             'debug' => [
                 'client' => $clientName,
                 'type' => $tipoPersona,
@@ -184,26 +115,20 @@ try {
             ]
         ]);
     } else {
-        logError("Failed to send email: " . $mail->ErrorInfo);
         throw new Exception('Error al enviar el email: ' . $mail->ErrorInfo);
     }
 
 } catch (Exception $e) {
-    // Log del error completo
-    logError("Exception caught: " . $e->getMessage());
-    logError("Stack trace: " . $e->getTraceAsString());
-    
-    // Respuesta de error
+    logError("Exception: " . $e->getMessage());
     sendJsonResponse([
         'success' => false, 
         'error' => $e->getMessage(),
         'debug' => [
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
             'timestamp' => date('Y-m-d H:i:s')
         ]
     ], 500);
 }
+
 
 // Función para generar el cuerpo HTML del email
 function generateEmailBody($formData, $clientName, $tipoPersona, $fechaActual) {
