@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import logoFile from '../assets/Logo_feli.jpg';
 
@@ -14,6 +13,7 @@ const UIFLegalForm = () => {
   const [progress, setProgress] = useState(0);
   const [showPepDetails, setShowPepDetails] = useState(false);
   const [estadoCivil, setEstadoCivil] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Referencias para los inputs de archivo
   const fileInputRefs = useRef({});
@@ -182,9 +182,8 @@ const UIFLegalForm = () => {
     });
   };
 
-  // Función mejorada para generar PDF
-// Función mejorada para generar PDF usando plantilla
-const generatePDFWithEmbeddedFiles = async (data, files) => {
+  // Función mejorada para generar PDF usando plantilla
+  const generatePDFWithEmbeddedFiles = async (data, files) => {
     try {
       updateProgress(10);
       showStatus('Cargando PDF-lib...', 'info');
@@ -625,28 +624,116 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
       showStatus(`PDF generado exitosamente con ${attachmentCount} archivos embebidos`, 'success');
   
       setGeneratedPdfBlob(blob);
-  
-      // Descargar automáticamente
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      const fileName = data.tipoPersona === 'fisica' 
-        ? (data.nombre || 'FormularioUIF').replace(/\s+/g, '_')
-        : (data.razonSocial || 'FormularioUIF').replace(/\s+/g, '_');
-      a.download = `Escribania_La_Riva_Form_${fileName}_${new Date().toISOString().split('T')[0]}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-  
-      setTimeout(() => updateProgress(0), 2000);
+      return blob;
   
     } catch (error) {
       console.error('Error generando PDF:', error);
       showStatus('Error al generar el PDF: ' + error.message, 'error');
       updateProgress(0);
+      throw error;
     }
   };
+
+  // Función para enviar email con PHP
+// Función mejorada para enviar email con PHP - con mejor manejo de errores
+const sendEmail = async (formData, pdfBlob) => {
+  try {
+    setIsSubmitting(true);
+    showStatus('Enviando formulario por email...', 'info');
+
+    // Crear FormData para enviar al PHP
+    const formDataToSend = new FormData();
+    
+    // Agregar los datos del formulario como JSON
+    formDataToSend.append('formData', JSON.stringify(formData));
+    
+    // Agregar el PDF como archivo
+    const clientName = formData.tipoPersona === 'fisica' ? formData.nombre : formData.razonSocial;
+    const fileName = `Formulario_UIF_${clientName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+    formDataToSend.append('pdfFile', pdfBlob, fileName);
+
+    console.log('Enviando datos a:', '/send_email.php');
+    console.log('Tamaño del PDF:', pdfBlob.size, 'bytes');
+
+    // Realizar la petición al script PHP con mejor manejo de errores
+    let response;
+    try {
+      response = await fetch('http://localhost:5000/send_email.php', {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'cors', // Importante para CORS
+      });
+    } catch (networkError) {
+      console.error('Error de red:', networkError);
+      throw new Error(`Error de conexión: ${networkError.message}`);
+    }
+
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
+
+    // Verificar si la respuesta es exitosa
+    if (!response.ok) {
+      console.error('Response not OK:', response.status, response.statusText);
+      
+      // Intentar leer la respuesta como texto para ver el error
+      const errorText = await response.text();
+      console.error('Error response body:', errorText);
+      
+      throw new Error(`Error del servidor (${response.status}): ${response.statusText}`);
+    }
+
+    // Intentar leer la respuesta
+    let result;
+    const contentType = response.headers.get('content-type');
+    console.log('Content-Type:', contentType);
+    
+    if (contentType && contentType.includes('application/json')) {
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        console.error('Error parseando JSON:', jsonError);
+        const textResponse = await response.text();
+        console.error('Respuesta como texto:', textResponse);
+        throw new Error(`Respuesta inválida del servidor. Expected JSON but got: ${textResponse.substring(0, 100)}...`);
+      }
+    } else {
+      // Si no es JSON, leer como texto para diagnosticar
+      const textResponse = await response.text();
+      console.error('Respuesta no es JSON:', textResponse);
+      throw new Error(`El servidor no devolvió JSON. Respuesta: ${textResponse.substring(0, 200)}...`);
+    }
+
+    console.log('Resultado del PHP:', result);
+
+    if (result.success) {
+      showStatus('✅ Formulario enviado exitosamente por email', 'success');
+    } else {
+      throw new Error(result.error || 'Error desconocido al enviar email');
+    }
+
+  } catch (error) {
+    console.error('Error completo enviando email:', error);
+    
+    // Mensajes de error más específicos
+    let errorMessage = 'Error enviando email: ';
+    
+    if (error.message.includes('Failed to fetch')) {
+      errorMessage += 'No se pudo conectar con el servidor. Verifique que send_email.php esté en la carpeta correcta.';
+    } else if (error.message.includes('Proxy erro')) {
+      errorMessage += 'Error de proxy del servidor. El archivo send_email.php podría no existir o estar mal configurado.';
+    } else if (error.message.includes('404')) {
+      errorMessage += 'Archivo send_email.php no encontrado. Asegúrese de que esté en la raíz del proyecto.';
+    } else if (error.message.includes('500')) {
+      errorMessage += 'Error interno del servidor PHP. Revise los logs del servidor.';
+    } else {
+      errorMessage += error.message;
+    }
+    
+    showStatus(`❌ ${errorMessage}`, 'error');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   // Función para enviar por WhatsApp
   const sendWhatsApp = () => {
@@ -656,14 +743,31 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
     }
 
     const clientName = formData.tipoPersona === 'fisica' ? formData.nombre : formData.razonSocial;
-    const clientId = formData.tipoPersona === 'fisica' ? formData.dni : 'N/A';
-
     const message = `Hola ${LAWYER_INFO.name}, le envio el formulario legal completo y todos los documentos adjuntos.`;
-
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${LAWYER_INFO.phone}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
+  };
+
+  // Función para descargar PDF
+  const downloadPDF = () => {
+    if (!generatedPdfBlob) {
+      showStatus('No hay PDF generado para descargar', 'error');
+      return;
+    }
+
+    const url = URL.createObjectURL(generatedPdfBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    const fileName = formData.tipoPersona === 'fisica' 
+      ? (formData.nombre || 'FormularioUIF').replace(/\s+/g, '_')
+      : (formData.razonSocial || 'FormularioUIF').replace(/\s+/g, '_');
+    a.download = `Escribania_La_Riva_Form_${fileName}_${new Date().toISOString().split('T')[0]}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   // Función para manejar envío del formulario
@@ -678,8 +782,24 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
     const data = collectFormData(e.target);
     setFormData(data);
 
-    // Generar PDF (ya no requiere archivos obligatorios)
-    await generatePDFWithEmbeddedFiles(data, uploadedFiles);
+    try {
+      // Generar PDF
+      const pdfBlob = await generatePDFWithEmbeddedFiles(data, uploadedFiles);
+      
+      // Enviar por email automáticamente
+      await sendEmail(data, pdfBlob);
+      
+      // También descargar automáticamente
+      setTimeout(() => {
+        downloadPDF();
+        updateProgress(0);
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error en el proceso:', error);
+      showStatus('Error en el proceso de generación y envío', 'error');
+      updateProgress(0);
+    }
   };
 
   return (
@@ -744,10 +864,12 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
         {/* Información sobre archivos embebidos */}
         <div className="bg-white/80 border-l-4 border-[#D1AE85] rounded-lg p-6 mb-8 shadow-md">
           <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            📎 ¡Completa el formulario, descarga tu PDF y envialo via Whatsapp!
+            📧 ¡Completa el formulario y se enviará automáticamente por email!
           </h3>
           <div className="text-gray-700 space-y-2">
             <p><strong>• Elegí el tipo de persona y completa los campos.</strong></p>
+            <p><strong>• Al enviar, se generará el PDF y se enviará automáticamente por email al abogado.</strong></p>
+            <p><strong>• También podrás descargarlo y enviarlo por WhatsApp si lo necesitas.</strong></p>
           </div>
         </div>
 
@@ -840,90 +962,87 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                       Estado Civil <span className="text-red-500">*</span>
                     </label>
                     <select
-                    
-  name="estadoCivil"
-  required
-  value={estadoCivil}
-  onChange={(e) => setEstadoCivil(e.target.value)}
-  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
->
-  <option value="">Seleccione estado civil</option>
-  <option value="Soltero">Soltero/a</option>
-  <option value="Casado">Casado/a</option>
-  <option value="Divorciado">Divorciado/a</option>
-  <option value="Viudo">Viudo/a</option>
-  <option value="Concubinato">Concubinato</option>
-</select>
-{(estadoCivil === 'Casado' || estadoCivil === 'Viudo' || estadoCivil === 'Concubinato') && (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Nombre del cónyuge/conviviente
-      </label>
-      <input
-        type="text"
-        name="nombreConyuge"
-        className="w-full border border-gray-300 rounded-md px-3 py-2"
-      />
-    </div>
+                      name="estadoCivil"
+                      required
+                      value={estadoCivil}
+                      onChange={(e) => setEstadoCivil(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                    >
+                      <option value="">Seleccione estado civil</option>
+                      <option value="Soltero">Soltero/a</option>
+                      <option value="Casado">Casado/a</option>
+                      <option value="Divorciado">Divorciado/a</option>
+                      <option value="Viudo">Viudo/a</option>
+                      <option value="Concubinato">Concubinato</option>
+                    </select>
+                    {(estadoCivil === 'Casado' || estadoCivil === 'Viudo' || estadoCivil === 'Concubinato') && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre del cónyuge/conviviente
+                          </label>
+                          <input
+                            type="text"
+                            name="nombreConyuge"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2"
+                          />
+                        </div>
 
-    {(estadoCivil === 'Casado' || estadoCivil === 'Viudo') && (
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Grado de Nupcias
-        </label>
-        <input
-          type="text"
-          name="gradoNupcias"
-          className="w-full border border-gray-300 rounded-md px-3 py-2"
-        />
-      </div>
-    )}
+                        {(estadoCivil === 'Casado' || estadoCivil === 'Viudo') && (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Grado de Nupcias
+                            </label>
+                            <input
+                              type="text"
+                              name="gradoNupcias"
+                              className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                          </div>
+                        )}
 
-    {estadoCivil === 'Concubinato' && (
-      <div className="col-span-2">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          ¿Unión convivencial inscripta?
-        </label>
-        <select
-          name="unionInscripta"
-          className="w-full border border-gray-300 rounded-md px-3 py-2"
-        >
-          <option value="">Seleccione</option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-    )}
-  </div>
-)}
+                        {estadoCivil === 'Concubinato' && (
+                          <div className="col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              ¿Unión convivencial inscripta?
+                            </label>
+                            <select
+                              name="unionInscripta"
+                              className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            >
+                              <option value="">Seleccione</option>
+                              <option value="Sí">Sí</option>
+                              <option value="No">No</option>
+                            </select>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
-
-{estadoCivil === 'Soltero' && (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Nombre del padre
-      </label>
-      <input
-        type="text"
-        name="nombrePadreSoltero"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Nombre de la madre
-      </label>
-      <input
-        type="text"
-        name="nombreMadreSoltero"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-  </div>
-)}
-
+                    {estadoCivil === 'Soltero' && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre del padre
+                          </label>
+                          <input
+                            type="text"
+                            name="nombrePadreSoltero"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre de la madre
+                          </label>
+                          <input
+                            type="text"
+                            name="nombreMadreSoltero"
+                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -938,7 +1057,6 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
                   />
                 </div>
-
 
                 {/* Datos de Contacto */}
                 <div className="bg-white/50 p-6 mt-8 rounded-lg border-l-4 border-[#A67C52] shadow-md">
@@ -1154,178 +1272,172 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                     </div>
                   </div>
                 </div>
+
                 {/* Información adicional */}
-<div className="mt-8 bg-white/80 p-6 rounded-lg border-l-4 border-[#D1AE85] shadow-md">
-  <h4 className="text-lg font-bold text-gray-800 mb-4">🏢 Información Laboral y Personal</h4>
-  <span className="block w-48 h-1 bg-[#D1AE85] mb-6"></span>
+                <div className="mt-8 bg-white/80 p-6 rounded-lg border-l-4 border-[#D1AE85] shadow-md">
+                  <h4 className="text-lg font-bold text-gray-800 mb-4">🏢 Información Laboral y Personal</h4>
+                  <span className="block w-48 h-1 bg-[#D1AE85] mb-6"></span>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Lugar o Empresa
-      </label>
-      <input
-        type="text"
-        name="empresa"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Domicilio Laboral
-      </label>
-      <input
-        type="text"
-        name="domicilioLaboral"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Piso
-      </label>
-      <input
-        type="text"
-        name="piso"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Depto.
-      </label>
-      <input
-        type="text"
-        name="depto"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Código Postal
-      </label>
-      <input
-        type="text"
-        name="cpLaboral"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Barrio / Localidad
-      </label>
-      <input
-        type="text"
-        name="barrioLaboral"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-    <div className="md:col-span-2">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Provincia
-      </label>
-      <input
-        type="text"
-        name="provinciaLaboral"
-        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-      />
-    </div>
-  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Lugar o Empresa
+                      </label>
+                      <input
+                        type="text"
+                        name="empresa"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Domicilio Laboral
+                      </label>
+                      <input
+                        type="text"
+                        name="domicilioLaboral"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Piso
+                      </label>
+                      <input
+                        type="text"
+                        name="piso"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Depto.
+                      </label>
+                      <input
+                        type="text"
+                        name="depto"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Código Postal
+                      </label>
+                      <input
+                        type="text"
+                        name="cpLaboral"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Barrio / Localidad
+                      </label>
+                      <input
+                        type="text"
+                        name="barrioLaboral"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Provincia
+                      </label>
+                      <input
+                        type="text"
+                        name="provinciaLaboral"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                      />
+                    </div>
+                  </div>
 
-  <div className="mt-6">
-  <label className="block text-sm font-medium text-gray-700 mb-2">
-    Ingresos Mensuales (Último Ejercicio) <span className="text-red-500">*</span>
-  </label>
-  <select
-    name="ingresosSMVM"
-    required
-    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-  >
-    <option value="">Seleccione una opción</option>
-    <option value="U$S 1.500">U$S 1.500</option>
-    <option value="U$S 1.500 -  6.000">U$S 1.500 -  6.000</option>
-    <option value="U$S 6.000 - 15.000">U$S 6.000 - 15.000</option>
-    <option value="MAS DE U$S 15.000">MAS DE U$S 15.000</option>
-  </select>
-</div>
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ingresos Mensuales (Último Ejercicio) <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      name="ingresosSMVM"
+                      required
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                    >
+                      <option value="">Seleccione una opción</option>
+                      <option value="U$S 1.500">U$S 1.500</option>
+                      <option value="U$S 1.500 -  6.000">U$S 1.500 -  6.000</option>
+                      <option value="U$S 6.000 - 15.000">U$S 6.000 - 15.000</option>
+                      <option value="MAS DE U$S 15.000">MAS DE U$S 15.000</option>
+                    </select>
+                  </div>
 
-  <div className="mt-6">
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      ¿Cómo llega usted a la escribanía? (Referido de) <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="text"
-      required
-      name="referido"
-      placeholder="Nombre o medio por el cual conoció la escribanía"
-      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-    />
-  </div>
-</div>
-
-            {/* Declaración UIF */}
-            <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
-              <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
-                <span className="text-3xl">⚠️</span>
-                Declaraciones juradas - U.I.F
-              </h3>
-              <span className="block w-48 h-1 bg-red-500 mb-6"></span>
-              
-              <div className="mt-6">
-  <p className="text-sm mb-4">
-    ¿Se encuentra incluido/a bajo la condición de <strong>Sujeto Obligado</strong> enumerados en el art. 20 de la Ley 25.246 y sus modificatorias sobre "Encubrimiento y Lavado de Activos" que he leído? 
-  </p>
-
-  <select name="sujetoUIF" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
-    <option value="">Seleccione una opción</option>
-    <option value="Sí">Sí</option>
-    <option value="No">No</option>
-  </select>
-  </div>
-  <div className="mt-6">
-  <p className="text-sm mb-4">
-    ¿Se encuentra incluido y/o comprendido bajo la condición de PERSONA EXPUESTA POLÍTICAMENTE (PEP) ante la UIF enumerados en el art.35 de la Ley 25.246 y sus modificatorias RESOLUCIÓN UIF N° RESOL-2023-35?
-  </p>
-
-  <select name="esPEP" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
-    <option value="">Seleccione una opción</option>
-    <option value="Si">Sí</option>
-    <option value="No">No</option>
-  </select>
-  </div>
-
-  
-              <div className="bg-red-50 border-2 mt-6 border-red-200 rounded-lg p-6 mb-6">
-                <p className="text-sm text-red-800 font-medium">
-                  <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
-                </p>
-              </div>
-
-              <div className="space-y-4">
-
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    name="aceptoTerminos"
-                    id="aceptoTerminos"
-                    required
-                    className="w-4 h-4 accent-red-500"
-                  />
-                  <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
-                    Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
-                  </label>
-                  
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      ¿Cómo llega usted a la escribanía? (Referido de) <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      name="referido"
+                      placeholder="Nombre o medio por el cual conoció la escribanía"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                    />
+                  </div>
                 </div>
-                <div className="text-xs text-gray-600 mt-4 mb-4">
-    Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.
-  </div>
-              </div>
-            </div>
 
+                {/* Declaración UIF */}
+                <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
+                  <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
+                    <span className="text-3xl">⚠️</span>
+                    Declaraciones juradas - U.I.F
+                  </h3>
+                  <span className="block w-48 h-1 bg-red-500 mb-6"></span>
+                  
+                  <div className="mt-6">
+                    <p className="text-sm mb-4">
+                      ¿Se encuentra incluido/a bajo la condición de <strong>Sujeto Obligado</strong> enumerados en el art. 20 de la Ley 25.246 y sus modificatorias sobre "Encubrimiento y Lavado de Activos" que he leído? 
+                    </p>
 
- 
+                    <select name="sujetoUIF" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
+                      <option value="">Seleccione una opción</option>
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                  <div className="mt-6">
+                    <p className="text-sm mb-4">
+                      ¿Se encuentra incluido y/o comprendido bajo la condición de PERSONA EXPUESTA POLÍTICAMENTE (PEP) ante la UIF enumerados en el art.35 de la Ley 25.246 y sus modificatorias RESOLUCIÓN UIF N° RESOL-2023-35?
+                    </p>
+
+                    <select name="esPEP" required className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors">
+                      <option value="">Seleccione una opción</option>
+                      <option value="Si">Sí</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+
+                  <div className="bg-red-50 border-2 mt-6 border-red-200 rounded-lg p-6 mb-6">
+                    <p className="text-sm text-red-800 font-medium">
+                      <strong>De acuerdo a la normativa vigente de prevención de lavado de activos, declaro bajo juramento haber completado la presente ficha sin omitir ni falsear dato alguno. TODOS LOS DATOS CONSIGNADOS EN LA PRESENTE SON CORRECTOS, COMPLETOS Y FIEL EXPRESIÓN DE LA VERDAD.</strong>
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        name="aceptoTerminos"
+                        id="aceptoTerminos"
+                        required
+                        className="w-4 h-4 accent-red-500"
+                      />
+                      <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
+                        Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                    <div className="text-xs text-gray-600 mt-4 mb-4">
+                      Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.
+                    </div>
+                  </div>
+                </div>
               </div>
-              
             )}
 
             {/* Datos Persona Jurídica */}
@@ -1424,34 +1536,34 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                 </div>
 
                 <div className="mt-6">
-  <label className="block text-sm font-medium text-gray-700 mb-2">
-    Ingresos Mensuales<span className="text-red-500">*</span>
-  </label>
-  <select
-    name="ingresosJuridico"
-    required
-    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-  >
-    <option value="">Seleccione una opción</option>
-    <option value="U$S 10.000">U$S 10.000</option>
-    <option value="U$S 10.000 -  50.000">U$S 10.000 -  50.000</option>
-    <option value="U$S 50.000 -  150.000">U$S 50.000 -  150.000</option>
-    <option value="MAS DE U$S 150.000">MAS DE U$S 150.000</option>
-  </select>
-</div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Ingresos Mensuales<span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="ingresosJuridico"
+                    required
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                  >
+                    <option value="">Seleccione una opción</option>
+                    <option value="U$S 10.000">U$S 10.000</option>
+                    <option value="U$S 10.000 -  50.000">U$S 10.000 -  50.000</option>
+                    <option value="U$S 50.000 -  150.000">U$S 50.000 -  150.000</option>
+                    <option value="MAS DE U$S 150.000">MAS DE U$S 150.000</option>
+                  </select>
+                </div>
 
                 <div className="mt-6">
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      ¿Cómo llega usted a la escribanía? (Referido de) <span className="text-red-500">*</span>
-    </label>
-    <input
-      type="text"
-      required
-      name="referidoJuridico"
-      placeholder="Nombre o medio por el cual conoció la escribanía"
-      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
-    />
-  </div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    ¿Cómo llega usted a la escribanía? (Referido de) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    name="referidoJuridico"
+                    placeholder="Nombre o medio por el cual conoció la escribanía"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#D1AE85] focus:ring-2 focus:ring-[#D1AE85]/20 transition-colors"
+                  />
+                </div>
 
                 {/* Datos de Contacto */}
                 <div className="bg-white/50 p-6 mt-8 rounded-lg border-l-4 border-[#A67C52] shadow-md">
@@ -1487,8 +1599,8 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                   </div>
 
                   <div className="mt-6">
-                  <h5 className="text-lg font-semibold text-gray-700 mt-4 mb-2">
-                    Domicilio real
+                    <h5 className="text-lg font-semibold text-gray-700 mt-4 mb-2">
+                      Domicilio real
                     </h5>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Dirección Completa <span className="text-red-500">*</span>
@@ -1710,36 +1822,35 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
                   </div>
                 </div>
 
-                            {/* Declaración UIF */}
-            <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
-              <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
-                <span className="text-3xl">⚠️</span>
-                Declaraciones juradas - U.I.F
-              </h3>
-              <span className="block w-48 h-1 bg-red-500 mb-6"></span>
-              
-              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
-                <p className="text-sm text-red-800 font-medium">
-                  <strong>Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.</strong>
-                </p>
-              </div>
+                {/* Declaración UIF */}
+                <div className="bg-white/80 p-6 mt-8 rounded-lg border-l-4 border-red-500 shadow-md">
+                  <h3 className="text-2xl font-bold text-red-700 mb-6 flex items-center gap-3">
+                    <span className="text-3xl">⚠️</span>
+                    Declaraciones juradas - U.I.F
+                  </h3>
+                  <span className="block w-48 h-1 bg-red-500 mb-6"></span>
+                  
+                  <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
+                    <p className="text-sm text-red-800 font-medium">
+                      <strong>Que se encuentran informados y aceptan la incorporación de sus datos personales y los aquí vertidos, en los archivos papel y/o informáticos de la escribanía, así como los que se ubiquen en servidores contratados a tal fin, los que se conservarán bajo carácter confidencial, sin perjuicio de las excepciones de obligado cumplimiento legal.</strong>
+                    </p>
+                  </div>
 
-              <div className="space-y-4">
-
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    name="aceptoTerminos"
-                    id="aceptoTerminos"
-                    required
-                    className="w-4 h-4 accent-red-500"
-                  />
-                  <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
-                    Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
-                  </label>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        name="aceptoTerminos"
+                        id="aceptoTerminos"
+                        required
+                        className="w-4 h-4 accent-red-500"
+                      />
+                      <label htmlFor="aceptoTerminos" className="text-sm font-bold text-gray-700">
+                        Acepto los términos y condiciones del tratamiento de datos <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
               </div>
             )}
 
@@ -1747,19 +1858,34 @@ const generatePDFWithEmbeddedFiles = async (data, files) => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
               <button
                 type="submit"
-                className="bg-[#D1AE85] hover:bg-[#A67C52] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+                disabled={isSubmitting}
+                className={`px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg ${
+                  isSubmitting 
+                    ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                    : 'bg-[#D1AE85] hover:bg-[#A67C52] text-white'
+                }`}
               >
-                📄 Generar PDF con Archivos Embebidos
+                {isSubmitting ? '⏳ Procesando...' : '📧 Generar PDF y Enviar por Email'}
               </button>
               
-              {generatedPdfBlob && (
-                <button
-                  type="button"
-                  onClick={sendWhatsApp}
-                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
-                >
-                  📱 Enviar por WhatsApp
-                </button>
+              {generatedPdfBlob && !isSubmitting && (
+                <>
+                  <button
+                    type="button"
+                    onClick={downloadPDF}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+                  >
+                    📄 Descargar PDF
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={sendWhatsApp}
+                    className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+                  >
+                    📱 Enviar por WhatsApp
+                  </button>
+                </>
               )}
             </div>
           </form>

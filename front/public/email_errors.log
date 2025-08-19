@@ -1,0 +1,32 @@
+2025-08-19 01:44:35 - Iniciando proceso de envío de email
+2025-08-19 01:44:35 - PHPMailer encontrado correctamente
+2025-08-19 01:44:35 - POST data keys: formData
+2025-08-19 01:44:35 - FILES data keys: pdfFile
+2025-08-19 01:44:35 - Form data decoded successfully
+2025-08-19 01:44:35 - Cliente: Ramiro Hernandez
+2025-08-19 01:44:35 - Error en upload de PDF: 1
+2025-08-19 01:44:35 - Exception caught: Error en la carga del archivo PDF: El archivo excede el tamaño máximo permitido por PHP
+2025-08-19 01:44:35 - Stack trace: #0 {main}
+2025-08-19 01:44:49 - Iniciando proceso de envío de email
+2025-08-19 01:44:49 - PHPMailer encontrado correctamente
+2025-08-19 01:44:49 - POST data keys: formData
+2025-08-19 01:44:49 - FILES data keys: pdfFile
+2025-08-19 01:44:49 - Form data decoded successfully
+2025-08-19 01:44:49 - Cliente: Ramiro Hernandez
+2025-08-19 01:44:49 - Error en upload de PDF: 1
+2025-08-19 01:44:49 - Exception caught: Error en la carga del archivo PDF: El archivo excede el tamaño máximo permitido por PHP
+2025-08-19 01:44:49 - Stack trace: #0 {main}
+2025-08-19 02:26:50 - Iniciando proceso de envío de email
+2025-08-19 02:26:50 - PHPMailer encontrado correctamente
+2025-08-19 02:26:50 - POST data keys: formData
+2025-08-19 02:26:50 - FILES data keys: pdfFile
+2025-08-19 02:26:50 - Form data decoded successfully
+2025-08-19 02:26:50 - Cliente: Testing
+2025-08-19 02:26:50 - PDF file size: 1689973 bytes
+2025-08-19 02:26:50 - PHPMailer instance created
+2025-08-19 02:26:50 - SMTP configuration set
+2025-08-19 02:26:50 - Email configuration set
+2025-08-19 02:26:50 - Email body generated
+2025-08-19 02:26:50 - PDF attachment added: Formulario_UIF_Testing_2025-08-19.pdf
+2025-08-19 02:26:50 - Attempting to send email...
+2025-08-19 02:27:02 - Email sent successfully
