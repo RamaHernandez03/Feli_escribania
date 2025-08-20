@@ -1,5 +1,5 @@
 <?php
-// send_email.php - Versión Gmail SMTP
+// send_email.php - Gmail SMTP con envío en background
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -22,12 +22,20 @@ function sendJsonResponse($data, $statusCode = 200) {
     http_response_code($statusCode);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
-    exit;
+
+    // Si existe fastcgi_finish_request, libera la respuesta al cliente
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    } else {
+        flush();
+        ob_flush();
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     logError("Método no permitido: " . $_SERVER['REQUEST_METHOD']);
     sendJsonResponse(['success' => false, 'error' => 'Método no permitido'], 405);
+    exit;
 }
 
 // Cargar PHPMailer
@@ -36,13 +44,11 @@ require_once __DIR__ . '/PHPMailer-master/src/PHPMailer.php';
 require_once __DIR__ . '/PHPMailer-master/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 try {
     logError("Iniciando proceso de envío de email");
     
-    // Verificar límites de archivo
     $maxFileSize = 25 * 1024 * 1024; // 25MB máximo
     
     if (!isset($_POST['formData']) || !isset($_FILES['pdfFile'])) {
@@ -69,34 +75,43 @@ try {
     $pdfFile = $_FILES['pdfFile'];
     logError("PDF file size: " . $pdfFile['size'] . " bytes");
 
-    $mail = new PHPMailer(true);
+    $tipoPersona = $formData['tipoPersona'] === 'fisica' ? 'Persona Física' : 'Persona Jurídica';
+    $fechaActual = date('d/m/Y H:i:s');
 
-    // Configuración SMTP para Gmail
+    // 🔹 RESPONDEMOS AL USUARIO DE INMEDIATO
+    sendJsonResponse([
+        'success' => true,
+        'message' => 'Formulario recibido, procesando envío...',
+        'debug' => [
+            'client' => $clientName,
+            'type' => $tipoPersona,
+            'timestamp' => $fechaActual
+        ]
+    ]);
+
+    // 🔹 EL ENVÍO SIGUE EN BACKGROUND
+    $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    
-    $emailFrom = 'felipelariva@gmail.com'; 
+
+    $emailFrom = 'felipelariva@gmail.com';
     $emailPassword = 'bgkkehuzwuyardtv';
     $emailTo = 'felipelariva@gmail.com';
     
     $mail->Username = $emailFrom;
     $mail->Password = $emailPassword;
     
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = 465;
-    
     $mail->SMTPDebug = 0;
 
     $mail->setFrom($emailFrom, 'Escribanía La Riva - Sistema de Formularios');
     $mail->addAddress($emailTo, 'Dr. La Riva');
 
-    $tipoPersona = $formData['tipoPersona'] === 'fisica' ? 'Persona Física' : 'Persona Jurídica';
     $mail->Subject = "Nuevo Formulario UIF - {$tipoPersona} - {$clientName}";
-
-    $fechaActual = date('d/m/Y H:i:s');
     $emailBody = generateEmailBody($formData, $clientName, $tipoPersona, $fechaActual);
-    
+
     $mail->isHTML(true);
     $mail->Body = $emailBody;
 
@@ -104,29 +119,13 @@ try {
     $mail->addAttachment($pdfFile['tmp_name'], $fileName, 'base64', 'application/pdf');
 
     if ($mail->send()) {
-        logError("Email sent successfully");
-        sendJsonResponse([
-            'success' => true, 
-            'message' => 'Formulario enviado exitosamente por email',
-            'debug' => [
-                'client' => $clientName,
-                'type' => $tipoPersona,
-                'timestamp' => $fechaActual
-            ]
-        ]);
+        logError("Email enviado correctamente a {$emailTo}");
     } else {
-        throw new Exception('Error al enviar el email: ' . $mail->ErrorInfo);
+        logError("Error al enviar email: " . $mail->ErrorInfo);
     }
 
 } catch (Exception $e) {
     logError("Exception: " . $e->getMessage());
-    sendJsonResponse([
-        'success' => false, 
-        'error' => $e->getMessage(),
-        'debug' => [
-            'timestamp' => date('Y-m-d H:i:s')
-        ]
-    ], 500);
 }
 
 

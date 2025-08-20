@@ -989,11 +989,11 @@ const sendEmail = async (formData, pdfBlob) => {
                       <option value="Viudo">Viudo/a</option>
                       <option value="Concubinato">Concubinato</option>
                     </select>
-                    {(estadoCivil === 'Casado' || estadoCivil === 'Viudo' || estadoCivil === 'Concubinato') && (
+                    {(estadoCivil === 'Casado' || estadoCivil === 'Viudo' || estadoCivil === 'Divorciado' || estadoCivil === 'Concubinato') && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Nombre del cónyuge/conviviente
+                            Nombre del cónyuge/conviviente{estadoCivil === 'Divorciado' ? ' (ex cónyuge)' : ''}
                           </label>
                           <input
                             type="text"
@@ -1002,7 +1002,7 @@ const sendEmail = async (formData, pdfBlob) => {
                           />
                         </div>
 
-                        {(estadoCivil === 'Casado' || estadoCivil === 'Viudo') && (
+                        {(estadoCivil === 'Casado' || estadoCivil === 'Viudo' || estadoCivil === 'Divorciado') && (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Grado de Nupcias
